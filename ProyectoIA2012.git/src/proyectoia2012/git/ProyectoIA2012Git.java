@@ -4,6 +4,8 @@
  */
 package proyectoia2012.git;
 
+import gui.FrontEnd;
+
 /**
  *
  * @author Omar
@@ -14,6 +16,7 @@ public class ProyectoIA2012Git {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FrontEnd myfe = new FrontEnd();
+        myfe.setVisible(true);
     }
 }
