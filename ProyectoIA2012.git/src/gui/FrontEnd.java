@@ -4,6 +4,8 @@
  */
 package gui;
 
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -18,6 +20,7 @@ public class FrontEnd extends javax.swing.JFrame {
     /**
      * Creates new form FrontEnd
      */
+    double x = 15, y = 50, w = 70, h = 70;
     public FrontEnd() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -43,21 +46,35 @@ public class FrontEnd extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButton1.setText("Edit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1149, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(1088, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 582, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(548, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -88,6 +105,32 @@ public class FrontEnd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        x++;
+        y++;
+        repaint(0,0,800,800);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void paint(Graphics g) 
+    {
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+                
+        Ellipse2D e = new Ellipse2D.Double(x, y, w, h);
+        GradientPaint gp = new GradientPaint(75, 75, Color.white,
+            95, 95, Color.gray, true);
+        // Fill with a gradient.
+        g2.setPaint(gp);
+        g2.fill(e);
+        // Stroke with a solid color.
+        e.setFrame(x + 100, y, w, h);
+        g2.setPaint(Color.black);
+        g2.setStroke(new BasicStroke(8));
+        g2.draw(e);
+        // Stroke with a gradient.
+        e.setFrame(x + 200, y, w, h);
+        g2.setPaint(gp);
+        g2.draw(e);
+    }
     /**
      * @param args the command line arguments
      */
@@ -130,6 +173,7 @@ public class FrontEnd extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
