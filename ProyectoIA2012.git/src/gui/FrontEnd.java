@@ -6,6 +6,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -114,22 +115,18 @@ public class FrontEnd extends javax.swing.JFrame {
     {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-                
-        Ellipse2D e = new Ellipse2D.Double(x, y, w, h);
-        GradientPaint gp = new GradientPaint(75, 75, Color.white,
-            95, 95, Color.gray, true);
-        // Fill with a gradient.
-        g2.setPaint(gp);
-        g2.fill(e);
-        // Stroke with a solid color.
-        e.setFrame(x + 100, y, w, h);
-        g2.setPaint(Color.black);
-        g2.setStroke(new BasicStroke(8));
-        g2.draw(e);
-        // Stroke with a gradient.
-        e.setFrame(x + 200, y, w, h);
-        g2.setPaint(gp);
-        g2.draw(e);
+        
+        for(x=1; x <20; x++)
+        {
+            for(y=1; y <20; y++)
+            {
+                Rectangle2D.Double square = new Rectangle2D.Double(60 + 35*x, 30 + 35*y, 25, 25);
+                    g2.setPaint(Color.white);
+                g2.fill(square);
+                g2.draw(square);
+            }
+            
+        }
     }
     /**
      * @param args the command line arguments
