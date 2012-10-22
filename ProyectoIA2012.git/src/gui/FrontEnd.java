@@ -7,10 +7,14 @@ package gui;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import structures.Item;
 
 /**
  *
@@ -22,6 +26,7 @@ public class FrontEnd extends javax.swing.JFrame {
      * Creates new form FrontEnd
      */
     double x = 15, y = 50, w = 70, h = 70;
+    ArrayList<Item> items = new ArrayList<Item>();
     public FrontEnd() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -50,6 +55,9 @@ public class FrontEnd extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,6 +87,19 @@ public class FrontEnd extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Abrir archivo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem2.setText("Salir");
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -111,6 +132,60 @@ public class FrontEnd extends javax.swing.JFrame {
         y++;
         repaint(0,0,800,800);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showSaveDialog(this);
+        if (seleccion == JFileChooser.APPROVE_OPTION)
+        {
+            Item tempo = new Item();
+            boolean tempoHasItems = false;
+            
+            FileInputStream fstream = null;
+            try {
+                File fichero = fileChooser.getSelectedFile();
+                fstream = new FileInputStream(fichero.getAbsoluteFile());
+                DataInputStream in = new DataInputStream(fstream);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String strLine;
+                
+                while ((strLine = br.readLine()) != null)   
+                {
+                    if(strLine.contains(":"))
+                    {
+                        if(tempoHasItems)
+                        {
+                            items.add(tempo);
+                            tempo = new Item();
+                            tempo.setName(strLine.replace(":", ""));
+                            tempoHasItems = false;
+                        }
+                        else
+                        {
+                            tempo = new Item();
+                            tempo.setName(strLine.replace(":", ""));
+                        }
+                        
+                    }
+                    else
+                    {
+                        tempoHasItems = true;
+                        //stringtokenizer para parserar objeto
+                    }
+                }
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    fstream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     public void paint(Graphics g) 
     {
         Graphics2D g2 = (Graphics2D)g;
@@ -174,6 +249,9 @@ public class FrontEnd extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
