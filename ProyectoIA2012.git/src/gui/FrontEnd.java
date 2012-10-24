@@ -4,16 +4,21 @@
  */
 package gui;
 
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import structures.Coordinate;
 import structures.Item;
 
 /**
@@ -53,6 +58,7 @@ public class FrontEnd extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -69,13 +75,22 @@ public class FrontEnd extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Debug");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(1088, Short.MAX_VALUE)
-                .addComponent(jButton1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(593, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -83,7 +98,9 @@ public class FrontEnd extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(548, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(473, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -98,6 +115,11 @@ public class FrontEnd extends javax.swing.JFrame {
         jMenu1.add(jSeparator1);
 
         jMenuItem2.setText("Salir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -158,17 +180,48 @@ public class FrontEnd extends javax.swing.JFrame {
                             items.add(tempo);
                             tempo = new Item();
                             tempo.setName(strLine.replace(":", ""));
+                            System.out.println(tempo.getName());
                             tempoHasItems = false;
                         }
                         else
                         {
                             tempo = new Item();
                             tempo.setName(strLine.replace(":", ""));
+                            System.out.println(tempo.getName());
                         }
                         
                     }
                     else
-                    {
+                    {  
+                        strLine = strLine.replace("(", "").replace(")", "");
+                        StringTokenizer tokenized = new StringTokenizer(strLine, "/");
+                        while(tokenized.hasMoreTokens())
+                        {
+                            //System.out.println("Token: " + tokenized.nextToken());
+                            int count = 0;
+                            Coordinate tempoCord = new Coordinate();
+                            StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
+                            while(subTokenized.hasMoreTokens())
+                            {
+                                String token = subTokenized.nextToken();
+                                System.out.println("Token: " + token);
+                                switch(count)
+                                {
+                                    case 0:
+                                        tempoCord.setX(Integer.parseInt(token));
+                                        break;
+                                    case 1:
+                                        tempoCord.setY(Integer.parseInt(token));
+                                        break;
+                                    case 2:
+                                        tempoCord.setLetter(token);
+                                        break;
+                                }
+                                count++;
+                            }
+                            tempo.addCoordinate(tempoCord);
+                            System.out.println("----------");
+                        }
                         tempoHasItems = true;
                         //stringtokenizer para parserar objeto
                     }
@@ -186,6 +239,27 @@ public class FrontEnd extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Iterator i = items.iterator();
+        while(i.hasNext())
+        {
+            Item m = (Item) i.next();
+            Iterator u = m.getCoordinates().iterator();
+            System.out.println(m.getName());
+            while(u.hasNext())
+            {
+                Coordinate coord = (Coordinate) u.next();
+                System.out.println(coord.getX()+ " , " +coord.getY()+ " , " + coord.getLetter());
+            }
+            System.out.println("-----------");
+            
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     public void paint(Graphics g) 
     {
         Graphics2D g2 = (Graphics2D)g;
@@ -195,7 +269,7 @@ public class FrontEnd extends javax.swing.JFrame {
         {
             for(y=1; y <20; y++)
             {
-                Rectangle2D.Double square = new Rectangle2D.Double(60 + 35*x, 30 + 35*y, 25, 25);
+                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25*x, 30 + 25*y, 20, 20);
                     g2.setPaint(Color.white);
                 g2.fill(square);
                 g2.draw(square);
@@ -246,6 +320,7 @@ public class FrontEnd extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
