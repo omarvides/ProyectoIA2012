@@ -8,10 +8,13 @@ package structures;
  *
  * @author Omar
  */
-class Coordinate {
+public class Coordinate {
     int x;
     int y;
     String letter;
+
+    public Coordinate() {
+    }
 
     public String getLetter() {
         return letter;
