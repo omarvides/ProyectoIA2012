@@ -9,11 +9,9 @@ package MAPITA;
  * @author Lyo
  */
 public class obstaculo {
-    
+
     int tipo;
-    
     int costo;
-    
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
@@ -30,6 +28,4 @@ public class obstaculo {
     public int getCosto() {
         return costo;
     }
-    
-    
 }

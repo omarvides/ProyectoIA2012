@@ -32,6 +32,7 @@ public class FrontEnd extends javax.swing.JFrame {
      */
     double x = 15, y = 50, w = 70, h = 70;
     ArrayList<Item> items = new ArrayList<Item>();
+
     public FrontEnd() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -163,62 +164,51 @@ public class FrontEnd extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         x++;
         y++;
-        repaint(0,0,800,800);
+        repaint(0, 0, 800, 800);
     }//GEN-LAST:event_jButton1ActionPerformed
-public static File archivo;
+    public static File archivo;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int seleccion = fileChooser.showOpenDialog(this);
-        if (seleccion == JFileChooser.APPROVE_OPTION)
-        {
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
             Item tempo = new Item();
             boolean tempoHasItems = false;
-            
+
             FileInputStream fstream = null;
             try {
                 File fichero = fileChooser.getSelectedFile();
-                archivo=fichero;
+                archivo = fichero;
                 fstream = new FileInputStream(fichero.getAbsoluteFile());
                 DataInputStream in = new DataInputStream(fstream);
                 BufferedReader br = new BufferedReader(new InputStreamReader(in));
                 String strLine;
-                
-                while ((strLine = br.readLine()) != null)   
-                {
-                    if(strLine.contains(":"))
-                    {
-                        if(tempoHasItems)
-                        {
+
+                while ((strLine = br.readLine()) != null) {
+                    if (strLine.contains(":")) {
+                        if (tempoHasItems) {
                             items.add(tempo);
                             tempo = new Item();
                             tempo.setName(strLine.replace(":", ""));
                             System.out.println(tempo.getName());
                             tempoHasItems = false;
-                        }
-                        else
-                        {
+                        } else {
                             tempo = new Item();
                             tempo.setName(strLine.replace(":", ""));
                             System.out.println(tempo.getName());
                         }
-                        
-                    }
-                    else
-                    {  
+
+                    } else {
                         strLine = strLine.replace("(", "").replace(")", "");
                         StringTokenizer tokenized = new StringTokenizer(strLine, "/");
-                        while(tokenized.hasMoreTokens())
-                        {
+                        while (tokenized.hasMoreTokens()) {
                             //System.out.println("Token: " + tokenized.nextToken());
                             int count = 0;
                             Coordinate tempoCord = new Coordinate();
                             StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
-                            while(subTokenized.hasMoreTokens())
-                            {
+                            while (subTokenized.hasMoreTokens()) {
                                 String token = subTokenized.nextToken();
                                 System.out.println("Token: " + token);
-                                switch(count)
-                                {
+                                switch (count) {
                                     case 0:
                                         tempoCord.setX(Integer.parseInt(token));
                                         break;
@@ -249,23 +239,21 @@ public static File archivo;
                 }
             }
         }
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Iterator i = items.iterator();
-        while(i.hasNext())
-        {
+        while (i.hasNext()) {
             Item m = (Item) i.next();
             Iterator u = m.getCoordinates().iterator();
             System.out.println(m.getName());
-            while(u.hasNext())
-            {
+            while (u.hasNext()) {
                 Coordinate coord = (Coordinate) u.next();
-                System.out.println(coord.getX()+ " , " +coord.getY()+ " , " + coord.getLetter());
+                System.out.println(coord.getX() + " , " + coord.getY() + " , " + coord.getLetter());
             }
             System.out.println("-----------");
-            
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -276,31 +264,29 @@ public static File archivo;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             // TODO add your handling code here:
-            
-            solucion.resolucion s=new solucion.resolucion();
-            
+
+            solucion.resolucion s = new solucion.resolucion();
+
             s.calcularrutaoptima();
         } catch (Exception ex) {
             Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-    public void paint(Graphics g) 
-    {
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        for(x=1; x <20; x++)
-        {
-            for(y=1; y <20; y++)
-            {
-                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25*x, 30 + 25*y, 20, 20);
-                    g2.setPaint(Color.white);
+    public void paint(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        for (x = 1; x < 20; x++) {
+            for (y = 1; y < 20; y++) {
+                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y, 20, 20);
+                g2.setPaint(Color.white);
                 g2.fill(square);
                 g2.draw(square);
             }
-            
+
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -336,7 +322,6 @@ public static File archivo;
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new FrontEnd().setVisible(true);
             }

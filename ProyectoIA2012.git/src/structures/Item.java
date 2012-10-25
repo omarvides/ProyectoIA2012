@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * @author Omar
  */
 public class Item {
+
     String name;
     ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-    
-    public void addCoordinate(Coordinate newCoordinate)
-    {
+
+    public void addCoordinate(Coordinate newCoordinate) {
         this.coordinates.add(newCoordinate);
     }
 
@@ -34,6 +34,4 @@ public class Item {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
 }

@@ -18,7 +18,7 @@ public class block {
     cuadra calleiz;
     cuadra calleder;
     Coordinate pos;
-    
+
     public cuadra getCalleiz() {
         return calleiz;
     }
@@ -34,5 +34,4 @@ public class block {
     public void setCalleder(cuadra calleder) {
         this.calleder = calleder;
     }
-    
 }

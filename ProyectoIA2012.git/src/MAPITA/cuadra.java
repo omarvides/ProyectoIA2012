@@ -12,10 +12,10 @@ import java.util.ArrayList;
  */
 public class cuadra {
 
-    ArrayList <obstaculo> obstaculos;
+    ArrayList<obstaculo> obstaculos;
     String tipo;
+
     public cuadra(String tipo) {
-        this.tipo=tipo;
+        this.tipo = tipo;
     }
-    
 }

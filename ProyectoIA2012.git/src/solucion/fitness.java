@@ -4,24 +4,22 @@
  */
 package solucion;
 
-
 import org.jgap.*;
 
 /**
  *
  * @author Lyo
  */
-public class fitness extends FitnessFunction{
+public class fitness extends FitnessFunction {
 
     @Override
     protected double evaluate(IChromosome ic) {
         //throw new UnsupportedOperationException("Not supported yet.");
-       
-          System.err.println(ic.getGene(0).getAllele().toString());
-          
+
+        System.err.println(ic.getGene(0).getAllele().toString());
+
         return 0;
-        
-        
+
+
     }
-    
 }
