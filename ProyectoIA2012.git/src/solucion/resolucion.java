@@ -26,7 +26,7 @@ import structures.*;
  * @author Lyo
  */
 public class resolucion {
-    private static final int MAX_EVOLUCIONES_PERMITIDAS = 2200;
+    private static final int MAX_EVOLUCIONES_PERMITIDAS = 200;
        public static String cadenaoptima ="";
        public static int posicioninicialx=0;
        public static int posicioninicialy=0;
@@ -99,9 +99,9 @@ public class resolucion {
 		// Se debe crear un cromosoma de ejemplo y cargarlo en la configuracion
 		// Cada gen tendra un valor maximo y minimo que debe setearse.
 		// --------------------------------------------------------------
-		Gene[] sampleGenes = new Gene[4];
-                    sampleGenes[0]= new StringGene(conf, 0, 10, "SENO");
-                
+		Gene[] sampleGenes = new Gene[1];
+                    sampleGenes[0]= new StringGene(conf, 0, 20, "SENO");
+                    
                 
                 
 		IChromosome sampleChromosome = new Chromosome(conf, sampleGenes);
