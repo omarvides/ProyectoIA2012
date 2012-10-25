@@ -128,9 +128,17 @@ obstaculos.add(semaforos);
     }
     
     
-    public void calculoObejtos()
+    public void calculoPeso(int x, int y)
     {
-        
+        //DEPENDIENDO DE LAS POSICION X Y Y Y SI ES CALLE O AVENIDA CALCULO EL PESO
+        //manzanasver][manzanashor
+        obstaculo aux;
+           /*PENDIENTE VER SI SE PUEDE CAMBIAR LO DE BLOCK O VER PORQUE SE HACE DIFERENCIA ENTRE CALLE Y AVENIDA
+            * Y NO SOLO DEJARLO COMO UN ATRIBUTO.
+            * PRIMERO CON LA POSICION X Y Y SE OBTIENE EL BLOQUE, LUEGO LA CUADRA Y POR ULTIMO EL ARRAYLIST
+            * DE LOS OBSTACULOS QUE HAYA Y LUEGO SE TOMA YA EL COSTO DE LOS OBSTACULOS
+            * QUE ESTA EN LA CUADRA (SUMANDOLOS). DE IGUAL FORMA SE PUEDE TOMAR EL VALOR DEL TIEMPO Y DE LA GASOLINA
+            * PARA ESTADISTICAS.
+           */
     }
-    
 }

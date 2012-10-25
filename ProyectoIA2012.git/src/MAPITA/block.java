@@ -14,39 +14,39 @@ public class block {
 
     public block(Coordinate pos) {
         this.pos = pos;
-        calleizq=new cuadra("C");
-        calleariba=new cuadra("A");
+        calle=new cuadra("C");
+        avenida=new cuadra("A");
     }
-    cuadra calleizq;
-    cuadra calleariba;
+    cuadra calle;
+    cuadra avenida;
     Coordinate pos;
     public void setobstaculo(String tipocuadra, obstaculo obs){
         if(tipocuadra.equalsIgnoreCase("C")){
-            calleizq.setObstaculos(obs);
+            calle.setObstaculos(obs);
         }else{
-            calleariba.setObstaculos(obs);
+            avenida.setObstaculos(obs);
         }
     
     }
         
-    public void setCalleizq(cuadra calleizq) {
-        this.calleizq = calleizq;
+    public void setCalle(cuadra calle) {
+        this.calle = calle;
     }
 
-    public void setCalleariba(cuadra calleariba) {
-        this.calleariba = calleariba;
+    public void setCalleariba(cuadra avenida) {
+        this.avenida = avenida;
     }
 
     public void setPos(Coordinate pos) {
         this.pos = pos;
     }
 
-    public cuadra getCalleizq() {
-        return calleizq;
+    public cuadra getCalle() {
+        return calle;
     }
 
-    public cuadra getCalleariba() {
-        return calleariba;
+    public cuadra getAvenida() {
+        return avenida;
     }
 
     public Coordinate getPos() {
