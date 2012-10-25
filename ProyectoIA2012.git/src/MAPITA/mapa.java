@@ -108,8 +108,7 @@ obstaculos.add(semaforos);
 
             }
         }
-        llenardeobstaculos();
-        int i=0;
+        llenardeobstaculos();     
     }
 
     private void llenardeobstaculos() {
