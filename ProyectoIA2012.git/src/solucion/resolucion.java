@@ -80,7 +80,7 @@ public class resolucion {
        
        
 
-    public static void calcularrutaoptima(Manzana m, )throws Exception {
+    public static void calcularrutaoptima( )throws Exception {
             
 		// Se crea una configuracion con valores predeterminados.
 		// -------------------------------------------------------------
@@ -91,7 +91,7 @@ public class resolucion {
 		conf.setPreservFittestIndividual(true);
 		// Se Crea la funcion de aptitud y se setea en la configuracion
 		// ---------------------------------------------------------
-		FitnessFunction myFunc = new fitness(Monto);
+		FitnessFunction myFunc = new fitness();
 		conf.setFitnessFunction(myFunc);
 		// Ahora se debe indicar a la configuracion como seran los cromosomas: en
 		// este caso tendran 8 genes (uno para cada tipo de moneda) con un valor
@@ -100,10 +100,7 @@ public class resolucion {
 		// Cada gen tendra un valor maximo y minimo que debe setearse.
 		// --------------------------------------------------------------
 		Gene[] sampleGenes = new Gene[4];
-                    sampleGenes[0]= new StringGene(conf, 0, 10, "S");
-                    sampleGenes[1]= new StringGene(conf, 0, 10, "E");
-                    sampleGenes[2]= new StringGene(conf, 0, 10, "N");
-                    sampleGenes[3]= new StringGene(conf, 0, 10, "O");
+                    sampleGenes[0]= new StringGene(conf, 0, 10, "SENO");
                 
                 
                 
@@ -121,11 +118,12 @@ public class resolucion {
 		Poblacion = Genotype.randomInitialGenotype(conf);
 		// La Poblacion debe evolucionar para obtener resultados mas aptos
 		// --------------------------   -------------------------------------
-		long TiempoComienzo = System.currentTimeMillis();
+		//long TiempoComienzo = System.currentTimeMillis();
 		for (int i = 0; i < MAX_EVOLUCIONES_PERMITIDAS; i++) {
 			Poblacion.evolve();
+                        System.out.println(i+":  "+Poblacion.getFittestChromosome());
 		}
-		long TiempoFin = System.currentTimeMillis();
+		//long TiempoFin = System.currentTimeMillis();
 		//cadena+="Tiempo total de evolucion: " + (TiempoFin - TiempoComienzo) + " ms";		guardarPoblacion(Poblacion);
 		// Una vez que la poblacion evoluciono es necesario obtener el cromosoma
 		// mas apto para mostrarlo como solucion al problema planteado para ello
