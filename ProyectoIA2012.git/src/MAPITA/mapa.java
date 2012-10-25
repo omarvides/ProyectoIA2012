@@ -126,4 +126,11 @@ obstaculos.add(semaforos);
        }
 //       tipo=1212;
     }
+    
+    
+    public void calculoObejtos()
+    {
+        
+    }
+    
 }
