@@ -14,24 +14,46 @@ public class block {
 
     public block(Coordinate pos) {
         this.pos = pos;
+        calleizq=new cuadra("C");
+        calleariba=new cuadra("A");
     }
-    cuadra calleiz;
-    cuadra calleder;
+    cuadra calleizq;
+    cuadra calleariba;
     Coordinate pos;
-
-    public cuadra getCalleiz() {
-        return calleiz;
+    public void setobstaculo(String tipocuadra, obstaculo obs){
+        if(tipocuadra.equalsIgnoreCase("C")){
+            calleizq.setObstaculos(obs);
+        }else{
+            calleariba.setObstaculos(obs);
+        }
+    
+    }
+        
+    public void setCalleizq(cuadra calleizq) {
+        this.calleizq = calleizq;
     }
 
-    public cuadra getCalleder() {
-        return calleder;
+    public void setCalleariba(cuadra calleariba) {
+        this.calleariba = calleariba;
     }
 
-    public void setCalleiz(cuadra calleiz) {
-        this.calleiz = calleiz;
+    public void setPos(Coordinate pos) {
+        this.pos = pos;
     }
 
-    public void setCalleder(cuadra calleder) {
-        this.calleder = calleder;
+    public cuadra getCalleizq() {
+        return calleizq;
     }
+
+    public cuadra getCalleariba() {
+        return calleariba;
+    }
+
+    public Coordinate getPos() {
+        return pos;
+    }
+
+    
+
+    
 }

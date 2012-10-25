@@ -12,7 +12,15 @@ import java.util.ArrayList;
  */
 public class cuadra {
 
-    ArrayList<obstaculo> obstaculos;
+    ArrayList<obstaculo> obstaculos=new ArrayList();
+
+    public ArrayList<obstaculo> getObstaculos() {
+        return obstaculos;
+    }
+
+    public void setObstaculos(obstaculo obst) {
+        this.obstaculos.add(obst);
+    }
     String tipo;
 
     public cuadra(String tipo) {

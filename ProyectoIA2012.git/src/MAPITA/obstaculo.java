@@ -10,6 +10,10 @@ package MAPITA;
  */
 public class obstaculo {
 
+    public obstaculo(int tipo) {
+        this.tipo = tipo;
+    }
+
     int tipo;
     int costo;
 

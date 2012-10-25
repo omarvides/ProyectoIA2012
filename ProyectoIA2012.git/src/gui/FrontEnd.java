@@ -4,6 +4,7 @@
  */
 package gui;
 
+import MAPITA.mapa;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -175,69 +176,74 @@ public class FrontEnd extends javax.swing.JFrame {
             boolean tempoHasItems = false;
 
             FileInputStream fstream = null;
-            try {
+//            try {
                 File fichero = fileChooser.getSelectedFile();
                 archivo = fichero;
+                mapa m1=new mapa(14,14);
+            try {
                 fstream = new FileInputStream(fichero.getAbsoluteFile());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 DataInputStream in = new DataInputStream(fstream);
                 BufferedReader br = new BufferedReader(new InputStreamReader(in));
                 String strLine;
 
-                while ((strLine = br.readLine()) != null) {
-                    if (strLine.contains(":")) {
-                        if (tempoHasItems) {
-                            items.add(tempo);
-                            tempo = new Item();
-                            tempo.setName(strLine.replace(":", ""));
-                            System.out.println(tempo.getName());
-                            tempoHasItems = false;
-                        } else {
-                            tempo = new Item();
-                            tempo.setName(strLine.replace(":", ""));
-                            System.out.println(tempo.getName());
-                        }
-
-                    } else {
-                        strLine = strLine.replace("(", "").replace(")", "");
-                        StringTokenizer tokenized = new StringTokenizer(strLine, "/");
-                        while (tokenized.hasMoreTokens()) {
-                            //System.out.println("Token: " + tokenized.nextToken());
-                            int count = 0;
-                            Coordinate tempoCord = new Coordinate();
-                            StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
-                            while (subTokenized.hasMoreTokens()) {
-                                String token = subTokenized.nextToken();
-                                System.out.println("Token: " + token);
-                                switch (count) {
-                                    case 0:
-                                        tempoCord.setX(Integer.parseInt(token));
-                                        break;
-                                    case 1:
-                                        tempoCord.setY(Integer.parseInt(token));
-                                        break;
-                                    case 2:
-                                        tempoCord.setLetter(token);
-                                        break;
-                                }
-                                count++;
-                            }
-                            tempo.addCoordinate(tempoCord);
-                            System.out.println("----------");
-                        }
-                        tempoHasItems = true;
-                        //stringtokenizer para parserar objeto
-                    }
-                }
-                in.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    fstream.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+//                while ((strLine = br.readLine()) != null) {
+//                    if (strLine.contains(":")) {
+//                        if (tempoHasItems) {
+//                            items.add(tempo);
+//                            tempo = new Item();
+//                            tempo.setName(strLine.replace(":", ""));
+//                            System.out.println(tempo.getName());
+//                            tempoHasItems = false;
+//                        } else {
+//                            tempo = new Item();
+//                            tempo.setName(strLine.replace(":", ""));
+//                            System.out.println(tempo.getName());
+//                        }
+//
+//                    } else {
+//                        strLine = strLine.replace("(", "").replace(")", "");
+//                        StringTokenizer tokenized = new StringTokenizer(strLine, "/");
+//                        while (tokenized.hasMoreTokens()) {
+//                            //System.out.println("Token: " + tokenized.nextToken());
+//                            int count = 0;
+//                            Coordinate tempoCord = new Coordinate();
+//                            StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
+//                            while (subTokenized.hasMoreTokens()) {
+//                                String token = subTokenized.nextToken();
+//                                System.out.println("Token: " + token);
+//                                switch (count) {
+//                                    case 0:
+//                                        tempoCord.setX(Integer.parseInt(token));
+//                                        break;
+//                                    case 1:
+//                                        tempoCord.setY(Integer.parseInt(token));
+//                                        break;
+//                                    case 2:
+//                                        tempoCord.setLetter(token);
+//                                        break;
+//                                }
+//                                count++;
+//                            }
+//                            tempo.addCoordinate(tempoCord);
+//                            System.out.println("----------");
+//                        }
+//                        tempoHasItems = true;
+//                        //stringtokenizer para parserar objeto
+//                    }
+//                }
+//                in.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+//            } finally {
+//                try {
+//                    fstream.close();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
