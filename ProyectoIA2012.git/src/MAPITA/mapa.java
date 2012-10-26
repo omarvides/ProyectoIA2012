@@ -32,7 +32,10 @@ public class mapa {
     ArrayList<String[]> reductores=new ArrayList();
     ArrayList<String[]> objetos=new ArrayList();
     ArrayList <ArrayList> obstaculos=new ArrayList();
-
+//sho si esta! vos dijiste linea 34 y esta en al 33 jajajaj esque no los ha'bía visto
+    /* esq  mira ahi tengo  6 array list de string[]
+     ahi esta x y C
+     va y es ese array list de hasta abajo de ostaculos es donde meto lso array list */
     public mapa(int manzanashor, int manzanasver, automovil carro) {
         this.manzanashor = manzanashor;
         this.manzanasver = manzanasver;
@@ -113,7 +116,21 @@ obstaculos.add(escuelas);
 obstaculos.add(reductores);
 obstaculos.add(semaforos);
 obstaculos.add(objetos);
-
+/*aqui ve no se si te sirve si me sirve pero todo el mapa con todo y los obstaculos donde creas el mapa
+ para podelro jalar en la ventana principal   
+ 
+ emm pues aqui perame te muestro
+ 
+ 
+ 
+ aqui abajo es ve es un mapa de blocks q los block son las manzanas a ya entonces voy a hacer un metodo getMapa para 
+ poder jalarlo 
+ si y ese llenar obstaculos de abajo llena las cuadras de obstaculosok
+ nítido
+ 10-4 ELDiaQueNoParaMI
+ 
+ hay le das pull q pablo acaba de ahcer un cambio
+ ok*/
 
         for (int i = 0; i < manzanashor; i++) {
             for (int j = 0; j < manzanasver; j++) {
