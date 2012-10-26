@@ -25,13 +25,13 @@ public class mapa {
     automovil ferrari;
 
     
-    ArrayList<String[]> semaforos=new ArrayList();
-    ArrayList<String[]> agujeros=new ArrayList();
-    ArrayList<String[]> comerciales=new ArrayList();
-    ArrayList<String[]> escuelas=new ArrayList();
-    ArrayList<String[]> reductores=new ArrayList();
-    ArrayList<String[]> objetos=new ArrayList();
-    ArrayList <ArrayList> obstaculos=new ArrayList();
+    public ArrayList<String[]> semaforos=new ArrayList();
+    public ArrayList<String[]> agujeros=new ArrayList();
+    public ArrayList<String[]> comerciales=new ArrayList();
+    public ArrayList<String[]> escuelas=new ArrayList();
+    public ArrayList<String[]> reductores=new ArrayList();
+    public ArrayList<String[]> objetos=new ArrayList();
+    public ArrayList <ArrayList> obstaculos=new ArrayList();
 //sho si esta! vos dijiste linea 34 y esta en al 33 jajajaj esque no los ha'bía visto
     /* esq  mira ahi tengo  6 array list de string[]
      ahi esta x y C
