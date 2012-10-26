@@ -4,6 +4,7 @@
  */
 package gui;
 
+import MAPITA.automovil;
 import MAPITA.mapa;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import solucion.resolucion;
 import structures.Coordinate;
 import structures.Item;
 
@@ -176,74 +178,83 @@ public class FrontEnd extends javax.swing.JFrame {
             boolean tempoHasItems = false;
 
             FileInputStream fstream = null;
-            try {
+//            try {
                 File fichero = fileChooser.getSelectedFile();
                 archivo = fichero;
-                mapa m1=new mapa(17,14);
-            try {
-                fstream = new FileInputStream(fichero.getAbsoluteFile());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                DataInputStream in = new DataInputStream(fstream);
-                BufferedReader br = new BufferedReader(new InputStreamReader(in));
-                String strLine;
-
-                while ((strLine = br.readLine()) != null) {
-                    if (strLine.contains(":")) {
-                        if (tempoHasItems) {
-                            items.add(tempo);
-                            tempo = new Item();
-                            tempo.setName(strLine.replace(":", ""));
-                            System.out.println(tempo.getName());
-                            tempoHasItems = false;
-                        } else {
-                            tempo = new Item();
-                            tempo.setName(strLine.replace(":", ""));
-                            System.out.println(tempo.getName());
-                        }
-
-                    } else {
-                        strLine = strLine.replace("(", "").replace(")", "");
-                        StringTokenizer tokenized = new StringTokenizer(strLine, "/");
-                        while (tokenized.hasMoreTokens()) {
-                            //System.out.println("Token: " + tokenized.nextToken());
-                            int count = 0;
-                            Coordinate tempoCord = new Coordinate();
-                            StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
-                            while (subTokenized.hasMoreTokens()) {
-                                String token = subTokenized.nextToken();
-                                System.out.println("Token: " + token);
-                                switch (count) {
-                                    case 0:
-                                        tempoCord.setX(Integer.parseInt(token));
-                                        break;
-                                    case 1:
-                                        tempoCord.setY(Integer.parseInt(token));
-                                        break;
-                                    case 2:
-                                        tempoCord.setLetter(token);
-                                        break;
-                                }
-                                count++;
-                            }
-                            tempo.addCoordinate(tempoCord);
-                            System.out.println("----------");
-                        }
-                        tempoHasItems = true;
-                        //stringtokenizer para parserar objeto
-                    }
-                }
-                in.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
+                automovil ferrari=new automovil(new Coordinate(1,2));
+                mapa m1=new mapa(17,14,ferrari);
+                Coordinate inicial =new Coordinate(1,2);
+                Coordinate pfinal =new Coordinate(7,7);
+                resolucion res=new resolucion();
                 try {
-                    fstream.close();
-                } catch (IOException ex) {
+                    res.calcularrutaoptima(m1, pfinal);
+                } catch (Exception ex) {
                     Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+//            try {
+//                fstream = new FileInputStream(fichero.getAbsoluteFile());
+//            } catch (FileNotFoundException ex) {
+//                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//                DataInputStream in = new DataInputStream(fstream);
+//                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+//                String strLine;
+//
+//                while ((strLine = br.readLine()) != null) {
+//                    if (strLine.contains(":")) {
+//                        if (tempoHasItems) {
+//                            items.add(tempo);
+//                            tempo = new Item();
+//                            tempo.setName(strLine.replace(":", ""));
+//                            System.out.println(tempo.getName());
+//                            tempoHasItems = false;
+//                        } else {
+//                            tempo = new Item();
+//                            tempo.setName(strLine.replace(":", ""));
+//                            System.out.println(tempo.getName());
+//                        }
+//
+//                    } else {
+//                        strLine = strLine.replace("(", "").replace(")", "");
+//                        StringTokenizer tokenized = new StringTokenizer(strLine, "/");
+//                        while (tokenized.hasMoreTokens()) {
+//                            //System.out.println("Token: " + tokenized.nextToken());
+//                            int count = 0;
+//                            Coordinate tempoCord = new Coordinate();
+//                            StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
+//                            while (subTokenized.hasMoreTokens()) {
+//                                String token = subTokenized.nextToken();
+//                                System.out.println("Token: " + token);
+//                                switch (count) {
+//                                    case 0:
+//                                        tempoCord.setX(Integer.parseInt(token));
+//                                        break;
+//                                    case 1:
+//                                        tempoCord.setY(Integer.parseInt(token));
+//                                        break;
+//                                    case 2:
+//                                        tempoCord.setLetter(token);
+//                                        break;
+//                                }
+//                                count++;
+//                            }
+//                            tempo.addCoordinate(tempoCord);
+//                            System.out.println("----------");
+//                        }
+//                        tempoHasItems = true;
+//                        //stringtokenizer para parserar objeto
+//                    }
+//                }
+//                in.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+//            } finally {
+//                try {
+//                    fstream.close();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -268,15 +279,7 @@ public class FrontEnd extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            // TODO add your handling code here:
-
-            solucion.resolucion s = new solucion.resolucion();
-
-            s.calcularrutaoptima();
-        } catch (Exception ex) {
-            Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  
     }//GEN-LAST:event_jButton3ActionPerformed
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

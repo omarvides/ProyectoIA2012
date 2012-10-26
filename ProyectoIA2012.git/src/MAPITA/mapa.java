@@ -21,6 +21,10 @@ public class mapa {
     int manzanasver;
     int manzanashor;
     block mapa[][];
+    String clima;
+    automovil ferrari;
+
+    
     ArrayList<String[]> semaforos=new ArrayList();
     ArrayList<String[]> agujeros=new ArrayList();
     ArrayList<String[]> comerciales=new ArrayList();
@@ -28,11 +32,11 @@ public class mapa {
     ArrayList<String[]> reductores=new ArrayList();
     ArrayList <ArrayList> obstaculos=new ArrayList();
 
-    public mapa(int manzanasver, int manzanashor) {
-        this.manzanasver = manzanasver;
+    public mapa(int manzanashor, int manzanasver, automovil carro) {
         this.manzanashor = manzanashor;
-
-        mapa = new block[manzanasver][manzanashor];
+        this.manzanasver = manzanasver;
+        ferrari=carro;
+        mapa = new block[manzanashor][manzanasver];
         try {
             // Abrimos el archivo
             System.out.println(FrontEnd.archivo.getPath());
@@ -102,8 +106,8 @@ obstaculos.add(reductores);
 obstaculos.add(semaforos);
 
 
-        for (int i = 0; i < manzanasver; i++) {
-            for (int j = 0; j < manzanashor; j++) {
+        for (int i = 0; i < manzanashor; i++) {
+            for (int j = 0; j < manzanasver; j++) {
                 mapa[i][j] = new block(new Coordinate(i, j));
 
             }
@@ -126,4 +130,67 @@ obstaculos.add(semaforos);
        }
 //       tipo=1212;
     }
+    public void setClima(String clima) {
+        this.clima = clima;
+    }
+
+
+    public String getClima() {
+        return clima;
+    }
+    
+    public automovil getFerrari() {
+        return ferrari;
+    }
+
+    public void setFerrari(automovil ferrari) {
+        this.ferrari = ferrari;
+    }
+    
+    public double recorermapa(String camino,Coordinate objetivo){
+        int tam;
+        double puntos=0;
+        tam=camino.length();
+        Coordinate resetpos=new  Coordinate(ferrari.posicion.getX(), ferrari.posicion.getY());
+       
+        for (int i=0;i<tam;i++){
+        int carrox=ferrari.getPosicion().getX();
+        int carroy=ferrari.getPosicion().getY();
+            if(camino.charAt(i)=="N".charAt(0)){
+                if(carroy+1<this.manzanasver)
+                    ferrari.iralnorte();
+                else
+                    i=tam;
+                          
+            }else if(camino.charAt(i)=="S".charAt(0)){
+                if(carroy-1>=0)
+                    ferrari.iralsur();
+                else
+                    i=tam;
+                    
+            }else if(camino.charAt(i)=="E".charAt(0)){
+                if(carrox+1<this.manzanashor)
+                    ferrari.iraleste();
+                else
+                    i=tam;
+                
+            }else if(camino.charAt(i)=="O".charAt(0)){
+                if(carrox-1>=0)
+                    ferrari.iraloeste();
+                else
+                    i=tam;
+            }
+            }
+        if((objetivo.getX()==ferrari.posicion.getX())&&(objetivo.getY()==ferrari.posicion.getY())){
+            puntos=1000;      
+            System.out.println("si llego----------------------------------------------------------------------"+ camino);
+        }else{
+            puntos=0;
+        }
+        
+        ferrari.setPosicion(resetpos);
+        return puntos;
+    }
+    
+    
 }

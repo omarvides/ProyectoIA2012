@@ -4,21 +4,16 @@
  */
 package solucion;
 
-import java.io.File;
+import MAPITA.automovil;
+import MAPITA.mapa;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
 import org.jgap.FitnessFunction;
 import org.jgap.Gene;
 import org.jgap.Genotype;
 import org.jgap.IChromosome;
-import org.jgap.data.DataTreeBuilder;
-import org.jgap.data.IDataCreators;
 import org.jgap.impl.DefaultConfiguration;
-import org.jgap.impl.IntegerGene;
 import org.jgap.impl.StringGene;
-import org.jgap.xml.XMLDocumentBuilder;
-import org.jgap.xml.XMLManager;
-import org.w3c.dom.Document;
 import structures.*;
 
 /**
@@ -78,7 +73,7 @@ public class resolucion {
         return posicionfinalx;
     }
 
-    public static void calcularrutaoptima() throws Exception {
+    public void calcularrutaoptima(mapa m, Coordinate pfinal) throws Exception {
 
         // Se crea una configuracion con valores predeterminados.
         // -------------------------------------------------------------
@@ -89,7 +84,7 @@ public class resolucion {
         conf.setPreservFittestIndividual(true);
         // Se Crea la funcion de aptitud y se setea en la configuracion
         // ---------------------------------------------------------
-        FitnessFunction myFunc = new fitness();
+        FitnessFunction myFunc = new fitness( m, pfinal);
         conf.setFitnessFunction(myFunc);
         // Ahora se debe indicar a la configuracion como seran los cromosomas: en
         // este caso tendran 8 genes (uno para cada tipo de moneda) con un valor
@@ -99,7 +94,6 @@ public class resolucion {
         // --------------------------------------------------------------
         Gene[] sampleGenes = new Gene[1];
         sampleGenes[0] = new StringGene(conf, 0, 20, "SENO");
-
 
 
         IChromosome sampleChromosome = new Chromosome(conf, sampleGenes);
