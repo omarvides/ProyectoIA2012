@@ -20,7 +20,11 @@ public class mapa {
 
     int manzanasver;
     int manzanashor;
-    block mapa[][];
+    public block mapa[][];
+    String clima;
+    automovil ferrari;
+
+    
     ArrayList<String[]> semaforos=new ArrayList();
     ArrayList<String[]> agujeros=new ArrayList();
     ArrayList<String[]> comerciales=new ArrayList();
@@ -28,11 +32,11 @@ public class mapa {
     ArrayList<String[]> reductores=new ArrayList();
     ArrayList <ArrayList> obstaculos=new ArrayList();
 
-    public mapa(int manzanasver, int manzanashor) {
-        this.manzanasver = manzanasver;
+    public mapa(int manzanashor, int manzanasver, automovil carro) {
         this.manzanashor = manzanashor;
-
-        mapa = new block[manzanasver][manzanashor];
+        this.manzanasver = manzanasver;
+        ferrari=carro;
+        mapa = new block[manzanashor][manzanasver];
         try {
             // Abrimos el archivo
             System.out.println(FrontEnd.archivo.getPath());
@@ -102,8 +106,8 @@ obstaculos.add(reductores);
 obstaculos.add(semaforos);
 
 
-        for (int i = 0; i < manzanasver; i++) {
-            for (int j = 0; j < manzanashor; j++) {
+        for (int i = 0; i < manzanashor; i++) {
+            for (int j = 0; j < manzanasver; j++) {
                 mapa[i][j] = new block(new Coordinate(i, j));
 
             }
@@ -126,13 +130,17 @@ obstaculos.add(semaforos);
        }
 //       tipo=1212;
     }
+
     
     
-    public void calculoPeso(int x, int y)
+    public double calculoPeso(int x, int y)
     {
         //DEPENDIENDO DE LAS POSICION X Y Y Y SI ES CALLE O AVENIDA CALCULO EL PESO
         //manzanasver][manzanashor
-        obstaculo aux;
+        cuadra aux_cuadra;
+        ArrayList<obstaculo> aux_obstaculos;
+        obstaculo aux_obstaculo;
+        double costo=0.00;
            /*PENDIENTE VER SI SE PUEDE CAMBIAR LO DE BLOCK O VER PORQUE SE HACE DIFERENCIA ENTRE CALLE Y AVENIDA
             * Y NO SOLO DEJARLO COMO UN ATRIBUTO.
             * PRIMERO CON LA POSICION X Y Y SE OBTIENE EL BLOQUE, LUEGO LA CUADRA Y POR ULTIMO EL ARRAYLIST
@@ -140,5 +148,187 @@ obstaculos.add(semaforos);
             * QUE ESTA EN LA CUADRA (SUMANDOLOS). DE IGUAL FORMA SE PUEDE TOMAR EL VALOR DEL TIEMPO Y DE LA GASOLINA
             * PARA ESTADISTICAS.
            */
+         if (mapa[x][y].tipo.equals("C"))
+         {
+             aux_cuadra=mapa[x][y].getCalle();
+         }
+         else{
+             aux_cuadra=mapa[x][y].getAvenida();
+         }
+         aux_obstaculos = aux_cuadra.getObstaculos();
+         
+         for (int i=0; i<aux_obstaculos.size();i++)
+         {
+             aux_obstaculo= aux_obstaculos.get(i);
+             costo+=aux_obstaculo.getCosto();
+         }
+        
+        
+       return costo; 
     }
+
+   public void setClima(String clima) {
+        this.clima = clima;
+    }
+
+
+    public String getClima() {
+        return clima;
+        
+    }
+    
+    public automovil getFerrari() {
+        return ferrari;
+    }
+
+    public void setFerrari(automovil ferrari) {
+        this.ferrari = ferrari;
+    }
+    
+    public double recorermapa(String camino,Coordinate objetivo){
+        int tam;
+        double puntos=0;
+        tam=camino.length();
+        Coordinate resetpos=new  Coordinate(ferrari.posicion.getX(), ferrari.posicion.getY());
+       switch (tam){
+            case 1:
+                puntos=puntos+500;
+                break;
+            case 2:
+                puntos=puntos+480;
+                break;
+            case 3:             
+                puntos=puntos+460;
+                break;
+            case 4:             
+                puntos=puntos+440;
+                break;
+            case 5: 
+                puntos=puntos+420;
+                break;
+            case 6:    
+                puntos=puntos+400;
+                break;
+            
+            case 7:
+                puntos=puntos+380;
+                break;
+            
+            case 8:             
+                puntos=puntos+360;
+                break;
+            
+            case 9:             
+                puntos=puntos+340;
+                break;
+            
+            case 10: 
+                puntos=puntos+320;
+                break;
+            case 11:
+                puntos=puntos+300;
+                break;
+            
+                
+            case 12:
+                puntos=puntos+280;
+                break;
+            
+                
+            case 13:            
+                puntos=puntos+260;
+                break;
+            
+            case 14:            
+                puntos=puntos+240;
+                break;
+            
+            case 15: 
+                puntos=puntos+220;
+                break;
+            case 16:
+            case 17:
+            case 18:                
+            case 19:                
+            case 20: 
+                puntos=puntos+75;
+                break;
+       }
+       for (int i=0;i<tam;i++){
+        int carrox=ferrari.getPosicion().getX();
+        int carroy=ferrari.getPosicion().getY();
+            if(camino.charAt(i)=="N".charAt(0)){
+                if(carroy+1<this.manzanasver)
+                    ferrari.iralnorte();
+                else
+                    i=tam;
+                
+                if(((i-1)>=0)&&(i!=tam)){
+                if ((camino.charAt(i)==camino.charAt(i-1))){
+                    puntos=puntos+20;
+                }else if(camino.charAt(i-1)=="E".charAt(0)){
+                    puntos=puntos-400;
+                }
+                }         
+            }else if(camino.charAt(i)=="S".charAt(0)){
+                if(carroy-1>=0)
+                    ferrari.iralsur();
+                else
+                    i=tam;
+                
+                if(((i-1)>=0)&&(i!=tam)){
+                if ((camino.charAt(i)==camino.charAt(i-1))){
+                    puntos=puntos+20;
+                }else if(camino.charAt(i-1)=="E".charAt(0)){
+                    puntos=puntos-400;
+                }
+                }
+            }else if(camino.charAt(i)=="E".charAt(0)){
+                if(carrox+1<this.manzanashor)
+                    ferrari.iraleste();
+                else
+                    i=tam;
+                
+                if(((i-1)>=0)&&(i!=tam)){
+                if ((camino.charAt(i)==camino.charAt(i-1))){
+                    puntos=puntos+20;
+                }else if(camino.charAt(i-1)=="E".charAt(0)){
+                    puntos=puntos-400;
+                }
+                }
+            }else if(camino.charAt(i)=="O".charAt(0)){
+                if(carrox-1>=0)
+                    ferrari.iraloeste();
+                else
+                    i=tam;
+                
+                if(((i-1)>=0)&&(i!=tam)){
+                if ((camino.charAt(i)==camino.charAt(i-1))){
+                    puntos=puntos+20;
+                }else if(camino.charAt(i-1)=="E".charAt(0)){
+                    puntos=puntos-400;
+                }
+                }
+            }
+            }
+        
+        
+        if((objetivo.getX()==ferrari.posicion.getX())&&(objetivo.getY()==ferrari.posicion.getY())){
+            puntos=puntos+2000;      
+            System.out.println("si llego----------------------------------------------------------------------"+ camino);
+        }else{
+            puntos=0;
+        }
+        
+        ferrari.setPosicion(resetpos);
+        
+        if(puntos <0){
+        puntos=0;
+        }
+        
+        return puntos;
+    }
+    
+    
 }
+

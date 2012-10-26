@@ -16,19 +16,26 @@ public class block {
         this.pos = pos;
         calle=new cuadra("C");
         avenida=new cuadra("A");
+        
     }
+    String tipo;
     cuadra calle;
     cuadra avenida;
     Coordinate pos;
     public void setobstaculo(String tipocuadra, obstaculo obs){
         if(tipocuadra.equalsIgnoreCase("C")){
             calle.setObstaculos(obs);
+            tipo = "C";
         }else{
             avenida.setObstaculos(obs);
+            tipo = "A";
         }
     
     }
-        
+//        
+//    public void setTipo(String t){
+//        if (t.equals())
+//    }
     public void setCalle(cuadra calle) {
         this.calle = calle;
     }
