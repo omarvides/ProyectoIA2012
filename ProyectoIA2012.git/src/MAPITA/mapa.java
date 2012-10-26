@@ -133,6 +133,7 @@ obstaculos.add(objetos);
            for (int j=0;j<aux.size();j++){
                 String  detalle[]=aux.get(j);
                 obstaculo obs=new obstaculo(tipo);
+                obs.calculoCosto(tipo);
                 mapa[Integer.parseInt(detalle[0])-1][Integer.parseInt(detalle[1])-1].setobstaculo(detalle[2], obs);
                 
            }
@@ -300,6 +301,29 @@ obstaculos.add(objetos);
         return puntos;
     }
     
-    
+     public double dddcaldculoPeso(int x, int y)
+    {
+        double costo=0.00;
+        ArrayList<obstaculo> aux_obstaculos;
+        obstaculo aux_obstaculo;
+        cuadra aux_cuadra;
+        
+        if (mapa[x][y].tipo.equals("C"))
+        {
+            aux_cuadra = mapa[x][y].getCalle();
+        }
+        else
+        {
+            aux_cuadra = mapa[x][y].getAvenida();
+        }
+        
+        aux_obstaculos= aux_cuadra.getObstaculos();
+        for (int i =0; i<aux_obstaculos.size(); i++)
+        {
+            aux_obstaculo= aux_obstaculos.get(i);
+            costo+=aux_obstaculo.getCosto();
+        }
+     return costo;
+    }
 }
 
