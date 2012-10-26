@@ -30,6 +30,7 @@ public class mapa {
     ArrayList<String[]> comerciales=new ArrayList();
     ArrayList<String[]> escuelas=new ArrayList();
     ArrayList<String[]> reductores=new ArrayList();
+    ArrayList<String[]> objetos=new ArrayList();
     ArrayList <ArrayList> obstaculos=new ArrayList();
 
     public mapa(int manzanashor, int manzanasver, automovil carro) {
@@ -80,6 +81,13 @@ public class mapa {
                             String sem[] = escuelas[i].replace("(", "").replace(")", "").split(",");
                             this.escuelas.add(sem);
                         }
+                 }else if (strLinea.equalsIgnoreCase("OBJETOS:")){
+                        String cadena5 = buffer.readLine();
+                        String objetos[] = cadena5.split("/");
+                        for (int i = 0; i < objetos.length; i++) {
+                            String sem[] = objetos[i].replace("(", "").replace(")", "").split(",");
+                            this.objetos.add(sem);
+                        }
                  }else if (strLinea.equalsIgnoreCase("REDUCTORES:")){
                
                         String cadena5 = buffer.readLine();
@@ -104,6 +112,7 @@ obstaculos.add(comerciales);
 obstaculos.add(escuelas);
 obstaculos.add(reductores);
 obstaculos.add(semaforos);
+obstaculos.add(objetos);
 
 
         for (int i = 0; i < manzanashor; i++) {
@@ -229,7 +238,7 @@ obstaculos.add(semaforos);
                 if ((camino.charAt(i)==camino.charAt(i-1))){
                     puntos=puntos+20;
                 }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-400;
+                    puntos=puntos-500;
                 }
                 }         
             }else if(camino.charAt(i)=="S".charAt(0)){
@@ -242,7 +251,7 @@ obstaculos.add(semaforos);
                 if ((camino.charAt(i)==camino.charAt(i-1))){
                     puntos=puntos+20;
                 }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-400;
+                    puntos=puntos-500;
                 }
                 }
             }else if(camino.charAt(i)=="E".charAt(0)){
@@ -255,7 +264,7 @@ obstaculos.add(semaforos);
                 if ((camino.charAt(i)==camino.charAt(i-1))){
                     puntos=puntos+20;
                 }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-400;
+                    puntos=puntos-500;
                 }
                 }
             }else if(camino.charAt(i)=="O".charAt(0)){
@@ -268,7 +277,7 @@ obstaculos.add(semaforos);
                 if ((camino.charAt(i)==camino.charAt(i-1))){
                     puntos=puntos+20;
                 }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-400;
+                    puntos=puntos-500;
                 }
                 }
             }
@@ -277,7 +286,7 @@ obstaculos.add(semaforos);
         
         if((objetivo.getX()==ferrari.posicion.getX())&&(objetivo.getY()==ferrari.posicion.getY())){
             puntos=puntos+2000;      
-            System.out.println("si llego----------------------------------------------------------------------"+ camino);
+          //  System.out.println("si llego----------------------------------------------------------------------"+ camino);
         }else{
             puntos=0;
         }

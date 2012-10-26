@@ -22,7 +22,7 @@ import structures.*;
  */
 public class resolucion {
 
-    private static final int MAX_EVOLUCIONES_PERMITIDAS = 200;
+    private static final int MAX_EVOLUCIONES_PERMITIDAS = 1500;
     public static String cadenaoptima = "";
     public static int posicioninicialx = 0;
     public static int posicioninicialy = 0;
@@ -101,7 +101,7 @@ public class resolucion {
         // Por ultimo se debe indicar el tamaño de la poblacion en la
         // configuracion
         // ------------------------------------------------------------
-        conf.setPopulationSize(5000);
+        conf.setPopulationSize(100000);
         Genotype Poblacion;
         // El framework permite obtener la poblacion inicial de archivos xml
         // pero para este caso particular resulta mejor crear una poblacion
@@ -110,17 +110,19 @@ public class resolucion {
         Poblacion = Genotype.randomInitialGenotype(conf);
         // La Poblacion debe evolucionar para obtener resultados mas aptos
         // --------------------------   -------------------------------------
-        //long TiempoComienzo = System.currentTimeMillis();
+        long TiempoComienzo = System.currentTimeMillis();
         for (int i = 0; i < MAX_EVOLUCIONES_PERMITIDAS; i++) {
             Poblacion.evolve();
-            System.out.println(i + ":  " + Poblacion.getFittestChromosome());
+           // System.out.println(i + ":  " + Poblacion.getFittestChromosome());
         }
-        //long TiempoFin = System.currentTimeMillis();
-        //cadena+="Tiempo total de evolucion: " + (TiempoFin - TiempoComienzo) + " ms";		guardarPoblacion(Poblacion);
+        long TiempoFin = System.currentTimeMillis();
+        System.err.println(        "Tiempo total de evolucion: " + (TiempoFin - TiempoComienzo) + " ms");
+        //guardarPoblacion(Poblacion);
         // Una vez que la poblacion evoluciono es necesario obtener el cromosoma
         // mas apto para mostrarlo como solucion al problema planteado para ello
         // se utiliza el metodo getFittestChromosome
         IChromosome cromosomaMasApto = Poblacion.getFittestChromosome();
+        System.out.println(cromosomaMasApto);
         //cadena+="\n"+ "El cromosoma mas apto encontrado tiene un valor de aptitud de: " + cromosomaMasApto.getFitnessValue();
         //cadena+="\n"+"Y esta formado por la siguiente distribucion de monedas: ";
 //		cadena+="\n"+"\t"	+ CambioMinimoFuncionAptitud.getNumeroDeComendasDeGen(cromosomaMasApto, 0) + " Monedas de 1 dólar";
