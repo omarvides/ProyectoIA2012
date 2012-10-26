@@ -301,14 +301,14 @@ obstaculos.add(objetos);
         return puntos;
     }
     
-     public double dddcaldculoPeso(int x, int y)
+     public double caldculoPeso(int x, int y, String tipo)
     {
         double costo=0.00;
         ArrayList<obstaculo> aux_obstaculos;
         obstaculo aux_obstaculo;
         cuadra aux_cuadra;
         
-        if (mapa[x][y].tipo.equals("C"))
+        if (tipo.equals("C"))
         {
             aux_cuadra = mapa[x][y].getCalle();
         }

@@ -54,7 +54,7 @@ public class obstaculo {
     public double getCosto() {
         return costo;
     }
-    
+        
     
     public void calculoCosto(int tipo)
     {
