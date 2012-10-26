@@ -99,7 +99,7 @@ public class FrontEnd extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(572, Short.MAX_VALUE)
+                .addContainerGap(583, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -163,8 +163,13 @@ public class FrontEnd extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        x++;
+        y++;
+        repaint(0, 0, 800, 800);
+    }//GEN-LAST:event_jButton1ActionPerformed
     public static File archivo;
-    mapa m1;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int seleccion = fileChooser.showOpenDialog(this);
@@ -177,11 +182,10 @@ public class FrontEnd extends javax.swing.JFrame {
                 File fichero = fileChooser.getSelectedFile();
                 archivo = fichero;
                 automovil ferrari=new automovil(new Coordinate(1,2));
-                m1=new mapa(17,14,ferrari);
+                mapa m1=new mapa(17,14,ferrari);
                 Coordinate inicial =new Coordinate(1,2);
                 Coordinate pfinal =new Coordinate(8,8);
                 resolucion res=new resolucion();
-                this.repaint();
                 try {
                     res.calcularrutaoptima(m1, pfinal);
                 } catch (Exception ex) {
@@ -255,14 +259,6 @@ public class FrontEnd extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Iterator i = items.iterator();
         while (i.hasNext()) {
@@ -278,36 +274,26 @@ public class FrontEnd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //x++;
-        //y++;
-        //repaint(0, 0, 800, 800);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+  
+    }//GEN-LAST:event_jButton3ActionPerformed
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        for (x = 0; x < 20; x++) {
-                for (y = 0; y < 20; y++) {
-                    Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y+50, 20, 20);
-                    g2.setPaint(Color.BLUE);
-                    g2.fill(square);
-                    //g2.draw(square);
-                }
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        for (x = 1; x < 20; x++) {
+            for (y = 1; y < 20; y++) {
+                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y, 20, 20);
+                g2.setPaint(Color.white);
+                g2.fill(square);
+                g2.draw(square);
             }
-        if(m1!=null){ 
-        //    
-            for (x = 0; x < m1.getManzHorizontal(); x++) {
-                for (y = 0; y < m1.getManzVertical(); y++) {
-                    Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y+50, 20, 20);
-                    g2.setPaint(Color.GREEN);
-                    g2.fill(square);
-                    g2.draw(square);
-                }
 
-            }
         }
-        
     }
 
     /**

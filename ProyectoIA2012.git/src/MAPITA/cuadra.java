@@ -19,6 +19,7 @@ public class cuadra {
     }
 
     public void setObstaculos(obstaculo obst) {
+        obst.calculoCosto(obst.getTipo());
         this.obstaculos.add(obst);
     }
     String tipo;
