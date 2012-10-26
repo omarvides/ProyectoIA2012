@@ -141,6 +141,18 @@ obstaculos.add(objetos);
         llenardeobstaculos();     
     }
 
+    public block[][] getMapa(){
+        return this.mapa;
+    }
+    
+    public int getManzVertical(){
+        return this.manzanasver;
+    }
+    
+    public int getManzHorizontal(){
+        return this.manzanashor;
+    }
+    
     private void llenardeobstaculos() {
         int tipo=0;
        for(int i=0;i<obstaculos.size();i++){
