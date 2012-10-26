@@ -101,7 +101,7 @@ public class resolucion {
         // Por ultimo se debe indicar el tamaño de la poblacion en la
         // configuracion
         // ------------------------------------------------------------
-        conf.setPopulationSize(1000);
+        conf.setPopulationSize(5000);
         Genotype Poblacion;
         // El framework permite obtener la poblacion inicial de archivos xml
         // pero para este caso particular resulta mejor crear una poblacion
