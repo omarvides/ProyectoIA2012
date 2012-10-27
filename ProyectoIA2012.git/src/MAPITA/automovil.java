@@ -4,6 +4,7 @@
  */
 package MAPITA;
 
+import gui.FrontEnd;
 import structures.Coordinate;
 
 /**
@@ -11,9 +12,20 @@ import structures.Coordinate;
  * @author Lyo
  */
 public class automovil {
-
+    double velocidadMax;
+    double aceleracion;
+    double potencia;
+    double consumo;
+    Coordinate posicion;
+    
     public automovil(Coordinate posicion) {
         this.posicion = posicion;
+        this.aceleracion=FrontEnd.acc;
+        this.consumo=FrontEnd.consumoGas;
+        this.velocidadMax=FrontEnd.maxVel;
+        this.potencia=FrontEnd.potencia;
+                
+        
     }
 
     public Coordinate getPosicion() {
@@ -36,12 +48,6 @@ public class automovil {
         posicion.setX(posicion.getX()-1);
     }
     
-    double velocidadMax;
-    double aceleracion;
-    double potencia;
-    double peso;
-    double consumo;
-    Coordinate posicion;
     
     
     

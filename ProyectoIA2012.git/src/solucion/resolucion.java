@@ -23,7 +23,7 @@ import structures.*;
  */
 public class resolucion {
 
-    private static final int MAX_EVOLUCIONES_PERMITIDAS = 50;
+    private static final int MAX_EVOLUCIONES_PERMITIDAS = Integer.parseInt(FrontEnd.evoluciones.getValue().toString());
     public static String cadenaoptima = "";
     public static int posicioninicialx = 0;
     public static int posicioninicialy = 0;
@@ -63,7 +63,7 @@ public class resolucion {
         // Por ultimo se debe indicar el tamaño de la poblacion en la
         // configuracion
         // ------------------------------------------------------------
-        conf.setPopulationSize(500000);
+        conf.setPopulationSize(Integer.parseInt(FrontEnd.poblacion.getValue().toString()));
         Genotype Poblacion;
         // El framework permite obtener la poblacion inicial de archivos xml
         // pero para este caso particular resulta mejor crear una poblacion
