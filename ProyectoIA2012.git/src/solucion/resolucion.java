@@ -4,8 +4,8 @@
  */
 package solucion;
 
-import MAPITA.automovil;
 import MAPITA.mapa;
+import gui.avance;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
 import org.jgap.FitnessFunction;
@@ -22,7 +22,7 @@ import structures.*;
  */
 public class resolucion {
 
-    private static final int MAX_EVOLUCIONES_PERMITIDAS = 1500;
+    private static final int MAX_EVOLUCIONES_PERMITIDAS = 10000;
     public static String cadenaoptima = "";
     public static int posicioninicialx = 0;
     public static int posicioninicialy = 0;
@@ -101,7 +101,7 @@ public class resolucion {
         // Por ultimo se debe indicar el tamaño de la poblacion en la
         // configuracion
         // ------------------------------------------------------------
-        conf.setPopulationSize(100000);
+        conf.setPopulationSize(10000);
         Genotype Poblacion;
         // El framework permite obtener la poblacion inicial de archivos xml
         // pero para este caso particular resulta mejor crear una poblacion
@@ -111,9 +111,16 @@ public class resolucion {
         // La Poblacion debe evolucionar para obtener resultados mas aptos
         // --------------------------   -------------------------------------
         long TiempoComienzo = System.currentTimeMillis();
+        avance.jProgressBar1.setMaximum(MAX_EVOLUCIONES_PERMITIDAS);
+            avance.jProgressBar1.setMinimum(0);
+            
         for (int i = 0; i < MAX_EVOLUCIONES_PERMITIDAS; i++) {
             Poblacion.evolve();
-           // System.out.println(i + ":  " + Poblacion.getFittestChromosome());
+            System.out.println(i + ":  " + Poblacion.getFittestChromosome());
+            //System.out.println(""+ new Double( ((Double.parseDouble(""+i) /Double.parseDouble(""+MAX_EVOLUCIONES_PERMITIDAS))*100)).shortValue()+"%");
+            //System.out.println(" "+i);
+            avance.jProgressBar1.setValue(i);
+            
         }
         long TiempoFin = System.currentTimeMillis();
         System.err.println(        "Tiempo total de evolucion: " + (TiempoFin - TiempoComienzo) + " ms");

@@ -162,123 +162,147 @@ obstaculos.add(objetos);
         double puntos=0;
         tam=camino.length();
         Coordinate resetpos=new  Coordinate(ferrari.posicion.getX(), ferrari.posicion.getY());
-       switch (tam){
-            case 1:
-                puntos=puntos+500;
-                break;
-            case 2:
-                puntos=puntos+480;
-                break;
-            case 3:             
-                puntos=puntos+460;
-                break;
-            case 4:             
-                puntos=puntos+440;
-                break;
-            case 5: 
-                puntos=puntos+420;
-                break;
-            case 6:    
-                puntos=puntos+400;
-                break;
-            
-            case 7:
-                puntos=puntos+380;
-                break;
-            
-            case 8:             
-                puntos=puntos+360;
-                break;
-            
-            case 9:             
-                puntos=puntos+340;
-                break;
-            
-            case 10: 
-                puntos=puntos+320;
-                break;
-            case 11:
-                puntos=puntos+300;
-                break;
-            
-                
-            case 12:
-                puntos=puntos+280;
-                break;
-            
-                
-            case 13:            
-                puntos=puntos+260;
-                break;
-            
-            case 14:            
-                puntos=puntos+240;
-                break;
-            
-            case 15: 
-                puntos=puntos+220;
-                break;
-            case 16:
-            case 17:
-            case 18:                
-            case 19:                
-            case 20: 
-                puntos=puntos+75;
-                break;
-       }
+//       switch (tam){
+//            case 1:
+//                puntos=puntos+500;
+//                break;
+//            case 2:
+//                puntos=puntos+480;
+//                break;
+//            case 3:             
+//                puntos=puntos+460;
+//                break;
+//            case 4:             
+//                puntos=puntos+440;
+//                break;
+//            case 5: 
+//                puntos=puntos+420;
+//                break;
+//            case 6:    
+//                puntos=puntos+400;
+//                break;
+//            
+//            case 7:
+//                puntos=puntos+380;
+//                break;
+//            
+//            case 8:             
+//                puntos=puntos+360;
+//                break;
+//            
+//            case 9:             
+//                puntos=puntos+340;
+//                break;
+//            
+//            case 10: 
+//                puntos=puntos+320;
+//                break;
+//            case 11:
+//                puntos=puntos+300;
+//                break;
+//            
+//                
+//            case 12:
+//                puntos=puntos+280;
+//                break;
+//            
+//                
+//            case 13:            
+//                puntos=puntos+260;
+//                break;
+//            
+//            case 14:            
+//                puntos=puntos+240;
+//                break;
+//            
+//            case 15: 
+//                puntos=puntos+220;
+//                break;
+//            case 16:
+//            case 17:
+//            case 18:                
+//            case 19:                
+//            case 20: 
+//                puntos=puntos+75;
+//                break;
+//            default :
+//                puntos=puntos+0;
+//       }
+        puntos=puntos+(100000/((tam*tam)+1));
+        
        for (int i=0;i<tam;i++){
         int carrox=ferrari.getPosicion().getX();
         int carroy=ferrari.getPosicion().getY();
             if(camino.charAt(i)=="N".charAt(0)){
-                if(carroy+1<this.manzanasver)
+                if(carroy+1<this.manzanasver){
+                    if(caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()+1, "C")!=0)
+                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()+1, "C"));
+                   
                     ferrari.iralnorte();
-                else
+                    
+                }else{
                     i=tam;
+                }
                 
                 if(((i-1)>=0)&&(i!=tam)){
                 if ((camino.charAt(i)==camino.charAt(i-1))){
-                    puntos=puntos+20;
-                }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-500;
+                    //puntos=puntos+200;
+                }else if(camino.charAt(i-1)=="S".charAt(0)){
+                    puntos=puntos-5000;
                 }
                 }         
             }else if(camino.charAt(i)=="S".charAt(0)){
-                if(carroy-1>=0)
+                if(carroy-1>=0){
+                    if(caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()-1, "C")!=0)
+                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()-1, "C"));
+                    
                     ferrari.iralsur();
-                else
+                }else{
                     i=tam;
-                
+                }
                 if(((i-1)>=0)&&(i!=tam)){
                 if ((camino.charAt(i)==camino.charAt(i-1))){
-                    puntos=puntos+20;
-                }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-500;
+                    //puntos=puntos+200;
+                }else if(camino.charAt(i-1)=="N".charAt(0)){
+                    puntos=puntos-5000;
                 }
                 }
             }else if(camino.charAt(i)=="E".charAt(0)){
-                if(carrox+1<this.manzanashor)
+                if(carrox+1<this.manzanashor){
+                    if(caldculoPeso(ferrari.posicion.getX()+1, ferrari.posicion.getY(), "A")!=0)
+                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX()+1, ferrari.posicion.getY(), "A"));
+                    
                     ferrari.iraleste();
-                else
+                    
+
+                }else{
                     i=tam;
+                }
                 
                 if(((i-1)>=0)&&(i!=tam)){
                 if ((camino.charAt(i)==camino.charAt(i-1))){
-                    puntos=puntos+20;
-                }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-500;
+                   // puntos=puntos+200;
+                }else if(camino.charAt(i-1)=="O".charAt(0)){
+                    puntos=puntos-5000;
                 }
                 }
             }else if(camino.charAt(i)=="O".charAt(0)){
-                if(carrox-1>=0)
+                if(carrox-1>=0){
+                    
+                    if(caldculoPeso(ferrari.posicion.getX()-1, ferrari.posicion.getY(), "A")!=0)
+                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX()-1, ferrari.posicion.getY(), "A"));
+                        
                     ferrari.iraloeste();
-                else
+                    
+                }else{
                     i=tam;
+                }
                 
                 if(((i-1)>=0)&&(i!=tam)){
                 if ((camino.charAt(i)==camino.charAt(i-1))){
-                    puntos=puntos+20;
+                    //puntos=puntos+200;
                 }else if(camino.charAt(i-1)=="E".charAt(0)){
-                    puntos=puntos-500;
+                    puntos=puntos-5000;
                 }
                 }
             }
@@ -286,7 +310,7 @@ obstaculos.add(objetos);
         
         
         if((objetivo.getX()==ferrari.posicion.getX())&&(objetivo.getY()==ferrari.posicion.getY())){
-            puntos=puntos+2000;      
+            puntos=puntos+6000000;      
           //  System.out.println("si llego----------------------------------------------------------------------"+ camino);
         }else{
             puntos=0;

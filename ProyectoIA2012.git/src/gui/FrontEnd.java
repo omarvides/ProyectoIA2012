@@ -4,8 +4,6 @@
  */
 package gui;
 
-import MAPITA.automovil;
-import MAPITA.mapa;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,7 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import solucion.resolucion;
+import solucion.ejecucion;
 import structures.Coordinate;
 import structures.Item;
 
@@ -99,9 +97,11 @@ public class FrontEnd extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(583, Short.MAX_VALUE)
+                .addContainerGap(431, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(152, 152, 152))
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -115,7 +115,7 @@ public class FrontEnd extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap(466, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -149,16 +149,13 @@ public class FrontEnd extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -178,85 +175,78 @@ public class FrontEnd extends javax.swing.JFrame {
             boolean tempoHasItems = false;
 
             FileInputStream fstream = null;
-//            try {
+            try {
                 File fichero = fileChooser.getSelectedFile();
                 archivo = fichero;
-                automovil ferrari=new automovil(new Coordinate(1,2));
-                mapa m1=new mapa(17,14,ferrari);
-                Coordinate inicial =new Coordinate(1,2);
-                Coordinate pfinal =new Coordinate(8,8);
-                resolucion res=new resolucion();
+                ejecucion eje=new ejecucion();
+                eje.start();
+                new avance().show();
+            try {
+                fstream = new FileInputStream(fichero.getAbsoluteFile());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                DataInputStream in = new DataInputStream(fstream);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String strLine;
+
+                while ((strLine = br.readLine()) != null) {
+                    if (strLine.contains(":")) {
+                        if (tempoHasItems) {
+                            items.add(tempo);
+                            tempo = new Item();
+                            tempo.setName(strLine.replace(":", ""));
+                            System.out.println(tempo.getName());
+                            tempoHasItems = false;
+                        } else {
+                            tempo = new Item();
+                            tempo.setName(strLine.replace(":", ""));
+                            System.out.println(tempo.getName());
+                        }
+
+                    } else {
+                        strLine = strLine.replace("(", "").replace(")", "");
+                        StringTokenizer tokenized = new StringTokenizer(strLine, "/");
+                        while (tokenized.hasMoreTokens()) {
+                            //System.out.println("Token: " + tokenized.nextToken());
+                            int count = 0;
+                            Coordinate tempoCord = new Coordinate();
+                            StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
+                            while (subTokenized.hasMoreTokens()) {
+                                String token = subTokenized.nextToken();
+                                System.out.println("Token: " + token);
+                                switch (count) {
+                                    case 0:
+                                        tempoCord.setX(Integer.parseInt(token));
+                                        break;
+                                    case 1:
+                                        tempoCord.setY(Integer.parseInt(token));
+                                        break;
+                                    case 2:
+                                        tempoCord.setLetter(token);
+                                        break;
+                                }
+                                count++;
+                            }
+                            tempo.addCoordinate(tempoCord);
+                            System.out.println("----------");
+                        }
+                        tempoHasItems = true;
+                        //stringtokenizer para parserar objeto
+                    }
+                }
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
                 try {
-                    res.calcularrutaoptima(m1, pfinal);
-                } catch (Exception ex) {
+                    fstream.close();
+                } catch (IOException ex) {
                     Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
                 }
-//            try {
-//                fstream = new FileInputStream(fichero.getAbsoluteFile());
-//            } catch (FileNotFoundException ex) {
-//                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//                DataInputStream in = new DataInputStream(fstream);
-//                BufferedReader br = new BufferedReader(new InputStreamReader(in));
-//                String strLine;
-//
-//                while ((strLine = br.readLine()) != null) {
-//                    if (strLine.contains(":")) {
-//                        if (tempoHasItems) {
-//                            items.add(tempo);
-//                            tempo = new Item();
-//                            tempo.setName(strLine.replace(":", ""));
-//                            System.out.println(tempo.getName());
-//                            tempoHasItems = false;
-//                        } else {
-//                            tempo = new Item();
-//                            tempo.setName(strLine.replace(":", ""));
-//                            System.out.println(tempo.getName());
-//                        }
-//
-//                    } else {
-//                        strLine = strLine.replace("(", "").replace(")", "");
-//                        StringTokenizer tokenized = new StringTokenizer(strLine, "/");
-//                        while (tokenized.hasMoreTokens()) {
-//                            //System.out.println("Token: " + tokenized.nextToken());
-//                            int count = 0;
-//                            Coordinate tempoCord = new Coordinate();
-//                            StringTokenizer subTokenized = new StringTokenizer(tokenized.nextToken(), ",");
-//                            while (subTokenized.hasMoreTokens()) {
-//                                String token = subTokenized.nextToken();
-//                                System.out.println("Token: " + token);
-//                                switch (count) {
-//                                    case 0:
-//                                        tempoCord.setX(Integer.parseInt(token));
-//                                        break;
-//                                    case 1:
-//                                        tempoCord.setY(Integer.parseInt(token));
-//                                        break;
-//                                    case 2:
-//                                        tempoCord.setLetter(token);
-//                                        break;
-//                                }
-//                                count++;
-//                            }
-//                            tempo.addCoordinate(tempoCord);
-//                            System.out.println("----------");
-//                        }
-//                        tempoHasItems = true;
-//                        //stringtokenizer para parserar objeto
-//                    }
-//                }
-//                in.close();
-//            } catch (IOException ex) {
-//                Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-//            } finally {
-//                try {
-//                    fstream.close();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
-//                }
 //            }
         }
-
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
