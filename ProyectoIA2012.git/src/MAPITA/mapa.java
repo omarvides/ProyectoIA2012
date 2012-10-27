@@ -27,6 +27,12 @@ public class mapa {
     
     public ArrayList<String[]> semaforos=new ArrayList();
     public ArrayList<String[]> agujeros=new ArrayList();
+
+    public String getRutaoptima() {
+        
+        return rutaoptima;
+    }
+    
     public ArrayList<String[]> comerciales=new ArrayList();
     public ArrayList<String[]> escuelas=new ArrayList();
     public ArrayList<String[]> reductores=new ArrayList();

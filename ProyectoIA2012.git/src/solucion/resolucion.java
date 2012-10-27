@@ -63,7 +63,7 @@ public class resolucion {
         // Por ultimo se debe indicar el tamaño de la poblacion en la
         // configuracion
         // ------------------------------------------------------------
-        conf.setPopulationSize(100000);
+        conf.setPopulationSize(500000);
         Genotype Poblacion;
         // El framework permite obtener la poblacion inicial de archivos xml
         // pero para este caso particular resulta mejor crear una poblacion
@@ -95,6 +95,7 @@ public class resolucion {
      this.cadenaoptima=cromosomaMasApto.getGene(0).getAllele().toString();
      m.setrutaoptima(cadenaoptima);
      m.llenarresultado();
+     boolean x=FrontEnd.Report.isEmpty();
      FrontEnd.av.setVisible(false);
     }
      public static IChromosome cromosomaMasApto;
