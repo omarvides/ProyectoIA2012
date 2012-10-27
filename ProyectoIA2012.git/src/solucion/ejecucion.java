@@ -22,10 +22,10 @@ public class ejecucion extends Thread{
     
     public void run(){
                 
-                automovil ferrari=new automovil(new Coordinate(3,2));
-                mapa m1=new mapa(13,10,ferrari);
-                Coordinate inicial =new Coordinate(1,2);
-                Coordinate pfinal =new Coordinate(9,9);
+                automovil ferrari=new automovil(new Coordinate(0,0));
+                mapa m1=new mapa(5,5,ferrari);
+              //  Coordinate inicial =new Coordinate(1,2);
+                Coordinate pfinal =new Coordinate(4,4);
                 resolucion res=new resolucion();
                 try {
                     res.calcularrutaoptima(m1, pfinal);
