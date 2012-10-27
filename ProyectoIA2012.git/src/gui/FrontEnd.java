@@ -33,16 +33,16 @@ public class FrontEnd extends javax.swing.JFrame {
      * Creates new form FrontEnd
      */
     double x = 15, y = 50, w = 70, h = 70;
-    ArrayList<Item> items = new ArrayList<Item>();
-    public static int xInicio = 0;
-    public static int yInicio = 0;
-    public static String orientacionInicio = "";
+    ArrayList<Item> items = new ArrayList<Item>();//Variable de uso extenso en la crecion de los obstaculos de manera dinamica
+    public static int xInicio = 0;//variable dinamica de inicio en posicion x en caso que el usuario decida definirla
+    public static int yInicio = 0;//variable dinamica de inicio en posicion x en caso que el usuario decida definirla
+    public static String orientacionInicio = "";//variable dinamica de inicio orientacion en caso que el usuario decida definirla
     
-    public static int xDestino = 0;
-    public static int yDestino = 0;
-    public static String orientacionDestino = "";
+    public static int xDestino = 0;//variable dinamica de final en posicion x en caso que el usuario decida definirla
+    public static int yDestino = 0;//variable dinamica de final en posicion y en caso que el usuario decida definirla
+    public static String orientacionDestino = "";//variable dinamica de destino orientacion en caso que el usuario decida definirla
     
-    public static String clima = "";
+    public static String clima = "";//variable dinamica clima en caso que el usuario decida definirla
 
     public FrontEnd() {
         try {
@@ -378,7 +378,7 @@ public class FrontEnd extends javax.swing.JFrame {
    mapa m1;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
-        jDialog1.setBounds(0, 0, 415, 320);
+        jDialog1.setBounds(0, 0, 415, 320);//dialogo que se muestra al inicio permitiendo al usuario personalizar las tareas
         jDialog1.setVisible(true);
         JFileChooser fileChooser = new JFileChooser();
         int seleccion = fileChooser.showOpenDialog(this);
@@ -472,7 +472,7 @@ public class FrontEnd extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Iterator i = items.iterator();
+        Iterator i = items.iterator();//seccion de codigo que se encarga de debuguear el archivo cargado
         while (i.hasNext()) {
             Item m = (Item) i.next();
             Iterator u = m.getCoordinates().iterator();
@@ -505,7 +505,7 @@ public class FrontEnd extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jCheckBox1.isSelected())
+        if(jCheckBox1.isSelected())//validacion de si se personaliza el archivo de entrada.
         {
             xInicio = (Integer)jSpinner1.getValue();
             yInicio = (Integer)jSpinner2.getValue();

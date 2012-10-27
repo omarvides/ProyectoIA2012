@@ -5,7 +5,8 @@
 package structures;
 
 /**
- *
+ *Estructura que sirve para las validaciones de coordenadas esta contendra una coordenada
+ * en X y una en Y asi como la orientacion de si sera calle o avenida
  * @author Omar
  */
 public class Coordinate {
