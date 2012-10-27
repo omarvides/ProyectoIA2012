@@ -19,11 +19,11 @@ import structures.Coordinate;
 public class ejecucion extends Thread{
     
     
-    
+    public static mapa m1;
     public void run(){
                 
                 automovil ferrari=new automovil(new Coordinate(0,0));
-                mapa m1=new mapa(5,5,ferrari);
+                 m1=new mapa(5,5,ferrari);
               //  Coordinate inicial =new Coordinate(1,2);
                 Coordinate pfinal =new Coordinate(4,4);
                 resolucion res=new resolucion();
