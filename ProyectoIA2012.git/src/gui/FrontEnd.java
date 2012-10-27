@@ -672,6 +672,10 @@ public class FrontEnd extends javax.swing.JFrame {
             }
 
         }
+       
+        for (int x = 1; x<10; x++){
+            
+        }
        }
        // }
 //        Graphics2D g2 = (Graphics2D) g;
