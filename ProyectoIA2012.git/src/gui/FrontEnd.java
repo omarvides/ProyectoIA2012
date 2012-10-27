@@ -658,11 +658,46 @@ public class FrontEnd extends javax.swing.JFrame {
     }//GEN-LAST:event_jDialog2WindowOpened
   public void paint(Graphics g) 
     {
-       super.paint(g);
+       Graphics2D g2 = (Graphics2D)g;
+       super.paint(g2);
        if(m1!=null){
-           
-       }
-       
+            
+            for (int x = 1; x < m1.getManzHorizontal(); x++) {
+            for (int y = 1; y < m1.getManzVertical(); y++) {
+                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y+50, 20, 20);
+                g2.setPaint(Color.green);
+                g2.fill(square);
+                g2.draw(square);
+            }
+
+        }
+        }
+//        Graphics2D g2 = (Graphics2D) g;
+        //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+//        for (int x = 1; x < 20; x++) {
+//            for (int y = 1; y < 20; y++) {
+//                g2.setPaint(Color.white);
+//                g2.fillRect(85*x,55*y, 20, 20);
+//                
+//                //g2.fill(square);
+//                //g2.draw(square);
+//            }
+//
+//        }       
+        
+//        if(m1!=null){
+//            
+//            for (int x = 1; x < m1.getManzHorizontal(); x++) {
+//            for (int y = 1; y < m1.getManzVertical(); y++) {
+//                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y+50, 20, 20);
+//                g2.setPaint(Color.green);
+//                g2.fill(square);
+//                g2.draw(square);
+//            }
+//
+//        }
+//        }
     }
 
     /**
