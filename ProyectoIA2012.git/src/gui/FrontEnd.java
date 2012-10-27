@@ -493,6 +493,7 @@ public class FrontEnd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public static File archivo;
    mapa m1;
+   public static avance av;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
         jDialog1.setBounds(0, 0, 800, 325);//dialogo que se muestra al inicio permitiendo al usuario personalizar las tareas
@@ -509,7 +510,8 @@ public class FrontEnd extends javax.swing.JFrame {
                 archivo = fichero;
                 ejecucion eje=new ejecucion();
                 eje.start();
-                new avance().show();
+               av= new avance();
+               av.setVisible(true);
             try {
                 fstream = new FileInputStream(fichero.getAbsoluteFile());
             } catch (FileNotFoundException ex) {

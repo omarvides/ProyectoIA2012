@@ -5,6 +5,7 @@
 package solucion;
 
 import MAPITA.mapa;
+import gui.FrontEnd;
 import gui.avance;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
@@ -94,6 +95,7 @@ public class resolucion {
      this.cadenaoptima=cromosomaMasApto.getGene(0).getAllele().toString();
      m.setrutaoptima(cadenaoptima);
      m.llenarresultado();
+     FrontEnd.av.setVisible(false);
     }
      public static IChromosome cromosomaMasApto;
 }
