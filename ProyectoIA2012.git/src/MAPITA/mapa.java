@@ -29,8 +29,13 @@ public class mapa {
     public ArrayList<String[]> agujeros=new ArrayList();
 
     public String getRutaoptima() {
+        String cadena="";
+        int tam=rutaoptima.length();
+        for(int i=0;i<tam;i++){
+            cadena=cadena+rutaoptima.charAt(i)+",";
+        }
         
-        return rutaoptima;
+        return cadena;
     }
     
     public ArrayList<String[]> comerciales=new ArrayList();
