@@ -781,7 +781,8 @@ public class FrontEnd extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-//    public void paint(Graphics g) 
+
+    public void paint(Graphics g) 
     {
        //Graphics2D g2 = (Graphics2D)g;
        super.paint(g);
