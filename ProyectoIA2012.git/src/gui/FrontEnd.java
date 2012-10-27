@@ -4,10 +4,10 @@
  */
 package gui;
 
+import MAPITA.mapa;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.io.*;
 import java.util.ArrayList;
@@ -167,6 +167,7 @@ public class FrontEnd extends javax.swing.JFrame {
         repaint(0, 0, 800, 800);
     }//GEN-LAST:event_jButton1ActionPerformed
     public static File archivo;
+    mapa m1;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int seleccion = fileChooser.showOpenDialog(this);
@@ -240,9 +241,15 @@ public class FrontEnd extends javax.swing.JFrame {
                 Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 try {
+//<<<<<<< HEAD
                     fstream.close();
                 } catch (IOException ex) {
                     Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+//=======
+                   // res.calcularrutaoptima(m1, pfinal);
+                } catch (Exception ex) {
+                    //Logger.getLogger(FrontEnd.class.getName()).log(Level.SEVERE, null, ex);
+//>>>>>>> branch 'master' of https://github.com/omarvides/ProyectoIA2012.git
                 }
 //            }
         }
@@ -273,16 +280,30 @@ public class FrontEnd extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (x = 1; x < 20; x++) {
-            for (y = 1; y < 20; y++) {
-                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y, 20, 20);
+        for (int x = 1; x < 20; x++) {
+            for (int y = 1; y < 20; y++) {
                 g2.setPaint(Color.white);
+                g2.fillRect(85*x,55*y, 20, 20);
+                
+                //g2.fill(square);
+                //g2.draw(square);
+            }
+
+        }       
+        
+        if(m1!=null){
+            
+            for (int x = 1; x < m1.getManzHorizontal(); x++) {
+            for (int y = 1; y < m1.getManzVertical(); y++) {
+                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y+50, 20, 20);
+                g2.setPaint(Color.green);
                 g2.fill(square);
                 g2.draw(square);
             }
 
+        }
         }
     }
 
