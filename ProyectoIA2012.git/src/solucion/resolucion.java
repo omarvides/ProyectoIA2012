@@ -89,8 +89,11 @@ public class resolucion {
         // Una vez que la poblacion evoluciono es necesario obtener el cromosoma
         // mas apto para mostrarlo como solucion al problema planteado para ello
         // se utiliza el metodo getFittestChromosome
-        IChromosome cromosomaMasApto = Poblacion.getFittestChromosome();
-        System.out.println(cromosomaMasApto);
-      
+         cromosomaMasApto = Poblacion.getFittestChromosome();
+        System.out.println(cromosomaMasApto.getGene(0).getAllele().toString());
+     this.cadenaoptima=cromosomaMasApto.getGene(0).getAllele().toString();
+     m.setrutaoptima(cadenaoptima);
+     m.llenarresultado();
     }
+     public static IChromosome cromosomaMasApto;
 }

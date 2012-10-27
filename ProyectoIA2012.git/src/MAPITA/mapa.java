@@ -383,5 +383,99 @@ obstaculos.add(objetos);
         }}
      return costo;
     }
+     String rutaoptima;
+    public void setrutaoptima(String cadenaoptima) {
+        rutaoptima=cadenaoptima;
+    }
+
+    public void llenarresultado() {
+        //FrontEnd.Report.add(0);
+        String camino=this.rutaoptima;
+        int tam=camino.length();
+        automovil ferrari=new automovil(new Coordinate(this.ferrari.getPosicion().getX(),this.ferrari.getPosicion().getY() ));
+       for (int i=0;i<tam;i++){
+        int carrox=ferrari.getPosicion().getX();
+        int carroy=ferrari.getPosicion().getY();
+            if(camino.charAt(i)=="N".charAt(0)){
+                if(carroy+1<this.manzanasver){
+                    if(caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()+1, "C")!=0)
+                    {  
+                        guardarobstaculo(ferrari.posicion.getX(), ferrari.posicion.getY()+1, "C");
+                    }
+                    ferrari.iralnorte();
+                    
+                }else{
+                    i=tam;
+                }
+                
+                        
+            }else if(camino.charAt(i)=="S".charAt(0)){
+                if(carroy-1>=0){
+                    if(caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()-1, "C")!=0)
+                    {  
+                               guardarobstaculo(ferrari.posicion.getX(), ferrari.posicion.getY()-1, "C");
+                               
+                    }
+                    ferrari.iralsur();
+                }else{
+                    i=tam;
+                }
+                
+            }else if(camino.charAt(i)=="E".charAt(0)){
+                if(carrox+1<this.manzanashor){
+                    if(caldculoPeso(ferrari.posicion.getX()+1, ferrari.posicion.getY(), "A")!=0)
+                    {  
+                        guardarobstaculo(ferrari.posicion.getX()+1, ferrari.posicion.getY(), "A");
+                    }
+                    ferrari.iraleste();
+                    
+
+                }else{
+                    i=tam;
+                }
+                
+            }else if(camino.charAt(i)=="O".charAt(0)){
+                if(carrox-1>=0){
+                    
+                    if(caldculoPeso(ferrari.posicion.getX()-1, ferrari.posicion.getY(), "A")!=0)
+                    {  
+                        guardarobstaculo(ferrari.posicion.getX()-1, ferrari.posicion.getY(), "A");
+                    }   
+                    ferrari.iraloeste();
+                    
+                }else{
+                    i=tam;
+                }
+                
+            }
+            }
+    }
+
+    private void guardarobstaculo(int x, int y, String tipo) {
+        double costo=0.00;
+        ArrayList<obstaculo> aux_obstaculos;
+        obstaculo aux_obstaculo;
+        cuadra aux_cuadra;
+        
+        if (tipo.equals("C"))
+        {
+            aux_cuadra = mapa[x][y].getCalle();
+        }
+        else
+        {
+            aux_cuadra = mapa[x][y].getAvenida();
+        }
+        
+        aux_obstaculos= aux_cuadra.getObstaculos();
+        if (aux_obstaculos.size()!=0){
+        for (int i =0; i<aux_obstaculos.size(); i++)
+        {
+            aux_obstaculo= aux_obstaculos.get(i);
+            costo+=aux_obstaculo.getCosto();
+            String c=aux_obstaculo.getTipoString()+"/"+x+","+y+"/"+ aux_obstaculo.getGasolina()+"/"+ aux_obstaculo.getRetardo();
+           FrontEnd.Report.add(c.split("/"));
+        }}
+       
+    }
 }
 
