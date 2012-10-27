@@ -22,7 +22,7 @@ import structures.*;
  */
 public class resolucion {
 
-    private static final int MAX_EVOLUCIONES_PERMITIDAS = 10000;
+    private static final int MAX_EVOLUCIONES_PERMITIDAS = 50;
     public static String cadenaoptima = "";
     public static int posicioninicialx = 0;
     public static int posicioninicialy = 0;
@@ -33,45 +33,6 @@ public class resolucion {
         resolucion.cadenaoptima = cadenaoptima;
     }
 
-    public static void setPosicioninicialx(int posicioninicialx) {
-        resolucion.posicioninicialx = posicioninicialx;
-    }
-
-    public static void setPosicioninicialy(int posicioninicialy) {
-        resolucion.posicioninicialy = posicioninicialy;
-    }
-
-    public static void setPosicionfinaly(int posicionfinaly) {
-        resolucion.posicionfinaly = posicionfinaly;
-    }
-
-    public static void setPosicionfinalx(int posicionfinalx) {
-        resolucion.posicionfinalx = posicionfinalx;
-    }
-
-    public static int getMAX_EVOLUCIONES_PERMITIDAS() {
-        return MAX_EVOLUCIONES_PERMITIDAS;
-    }
-
-    public static String getCadenaoptima() {
-        return cadenaoptima;
-    }
-
-    public static int getPosicioninicialx() {
-        return posicioninicialx;
-    }
-
-    public static int getPosicioninicialy() {
-        return posicioninicialy;
-    }
-
-    public static int getPosicionfinaly() {
-        return posicionfinaly;
-    }
-
-    public static int getPosicionfinalx() {
-        return posicionfinalx;
-    }
 
     public void calcularrutaoptima(mapa m, Coordinate pfinal) throws Exception {
 
@@ -101,7 +62,7 @@ public class resolucion {
         // Por ultimo se debe indicar el tamaño de la poblacion en la
         // configuracion
         // ------------------------------------------------------------
-        conf.setPopulationSize(10000);
+        conf.setPopulationSize(100000);
         Genotype Poblacion;
         // El framework permite obtener la poblacion inicial de archivos xml
         // pero para este caso particular resulta mejor crear una poblacion
@@ -111,7 +72,7 @@ public class resolucion {
         // La Poblacion debe evolucionar para obtener resultados mas aptos
         // --------------------------   -------------------------------------
         long TiempoComienzo = System.currentTimeMillis();
-        avance.jProgressBar1.setMaximum(MAX_EVOLUCIONES_PERMITIDAS);
+        avance.jProgressBar1.setMaximum(MAX_EVOLUCIONES_PERMITIDAS-1);
             avance.jProgressBar1.setMinimum(0);
             
         for (int i = 0; i < MAX_EVOLUCIONES_PERMITIDAS; i++) {
@@ -130,14 +91,6 @@ public class resolucion {
         // se utiliza el metodo getFittestChromosome
         IChromosome cromosomaMasApto = Poblacion.getFittestChromosome();
         System.out.println(cromosomaMasApto);
-        //cadena+="\n"+ "El cromosoma mas apto encontrado tiene un valor de aptitud de: " + cromosomaMasApto.getFitnessValue();
-        //cadena+="\n"+"Y esta formado por la siguiente distribucion de monedas: ";
-//		cadena+="\n"+"\t"	+ CambioMinimoFuncionAptitud.getNumeroDeComendasDeGen(cromosomaMasApto, 0) + " Monedas de 1 dólar";
-//                cadena+="\n"+"\t"	+ CambioMinimoFuncionAptitud.getNumeroDeComendasDeGen(cromosomaMasApto, 1) + " Monedas de 50 centavos";
-//		cadena+="\n"+"\t"	+ CambioMinimoFuncionAptitud.getNumeroDeComendasDeGen(cromosomaMasApto, 2) + " Monedas de 25 centavos";
-//		cadena+="\n"+"\t"	+ CambioMinimoFuncionAptitud.getNumeroDeComendasDeGen(cromosomaMasApto, 3) + " Monedas de 10 centavos";
-//		cadena+="\n"+"\t"	+ CambioMinimoFuncionAptitud.getNumeroDeComendasDeGen(cromosomaMasApto, 4) + " Monedas de 5 centavos";
-//		cadena+="\n"+"\t" + CambioMinimoFuncionAptitud.getNumeroDeComendasDeGen(cromosomaMasApto, 5) + " Monedas de 1 centavo";
-//                cadena+="\n"+"Para un total de "+ CambioMinimoFuncionAptitud.montoCambioMoneda(cromosomaMasApto) + " centavos en " + CambioMinimoFuncionAptitud.getNumeroTotalMonedas(cromosomaMasApto) + " monedas.";
+      
     }
 }

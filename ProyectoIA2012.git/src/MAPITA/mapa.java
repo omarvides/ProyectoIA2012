@@ -265,8 +265,9 @@ obstaculos.add(objetos);
             if(camino.charAt(i)=="N".charAt(0)){
                 if(carroy+1<this.manzanasver){
                     if(caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()+1, "C")!=0)
-                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()+1, "C"));
-                   
+                    {  
+                        puntos=puntos-(10000*this.caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()+1, "C"));
+                    }
                     ferrari.iralnorte();
                     
                 }else{
@@ -283,8 +284,9 @@ obstaculos.add(objetos);
             }else if(camino.charAt(i)=="S".charAt(0)){
                 if(carroy-1>=0){
                     if(caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()-1, "C")!=0)
-                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()-1, "C"));
-                    
+                    {  
+                        puntos=puntos-(10000*this.caldculoPeso(ferrari.posicion.getX(), ferrari.posicion.getY()-1, "C"));
+                    }
                     ferrari.iralsur();
                 }else{
                     i=tam;
@@ -299,8 +301,9 @@ obstaculos.add(objetos);
             }else if(camino.charAt(i)=="E".charAt(0)){
                 if(carrox+1<this.manzanashor){
                     if(caldculoPeso(ferrari.posicion.getX()+1, ferrari.posicion.getY(), "A")!=0)
-                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX()+1, ferrari.posicion.getY(), "A"));
-                    
+                    {  
+                        puntos=puntos-(10000*this.caldculoPeso(ferrari.posicion.getX()+1, ferrari.posicion.getY(), "A"));
+                    }
                     ferrari.iraleste();
                     
 
@@ -319,8 +322,9 @@ obstaculos.add(objetos);
                 if(carrox-1>=0){
                     
                     if(caldculoPeso(ferrari.posicion.getX()-1, ferrari.posicion.getY(), "A")!=0)
-                        puntos=puntos-(100000*this.caldculoPeso(ferrari.posicion.getX()-1, ferrari.posicion.getY(), "A"));
-                        
+                    {  
+                        puntos=puntos-(10000*this.caldculoPeso(ferrari.posicion.getX()-1, ferrari.posicion.getY(), "A"));
+                    }   
                     ferrari.iraloeste();
                     
                 }else{
@@ -371,11 +375,12 @@ obstaculos.add(objetos);
         }
         
         aux_obstaculos= aux_cuadra.getObstaculos();
+        if (aux_obstaculos.size()!=0){
         for (int i =0; i<aux_obstaculos.size(); i++)
         {
             aux_obstaculo= aux_obstaculos.get(i);
             costo+=aux_obstaculo.getCosto();
-        }
+        }}
      return costo;
     }
 }

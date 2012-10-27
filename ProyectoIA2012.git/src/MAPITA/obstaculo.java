@@ -63,6 +63,7 @@ public class obstaculo {
             case 1: //Agujeros
                 this.setGasolina(0.05);
                 this.setRetardo(30);
+                break;
                 
             case 2://Comerciales
                 this.setGasolina(0.03);
@@ -85,7 +86,7 @@ public class obstaculo {
                   this.setRetardo(13);
                 break;   
         }
-         this.setCosto(getCosto()*getRetardo());
+         this.setCosto(getGasolina()*getRetardo());
         
     }
     
