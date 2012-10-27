@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 import solucion.ejecucion;
 import structures.Coordinate;
 import structures.Item;
@@ -33,6 +34,7 @@ public class FrontEnd extends javax.swing.JFrame {
      * Creates new form FrontEnd
      */
     double x = 15, y = 50, w = 70, h = 70;
+    public static ArrayList<String[]> Report = new ArrayList<String[]>();
     ArrayList<Item> items = new ArrayList<Item>();//Variable de uso extenso en la crecion de los obstaculos de manera dinamica
     public static int xInicio = 0;//variable dinamica de inicio en posicion x en caso que el usuario decida definirla
     public static int yInicio = 0;//variable dinamica de inicio en posicion x en caso que el usuario decida definirla
@@ -41,6 +43,7 @@ public class FrontEnd extends javax.swing.JFrame {
     public static int xDestino = 0;//variable dinamica de final en posicion x en caso que el usuario decida definirla
     public static int yDestino = 0;//variable dinamica de final en posicion y en caso que el usuario decida definirla
     public static String orientacionDestino = "";//variable dinamica de destino orientacion en caso que el usuario decida definirla
+    DefaultTableModel dm = new DefaultTableModel();
     
     public static String clima = "";//variable dinamica clima en caso que el usuario decida definirla
 
@@ -91,6 +94,10 @@ public class FrontEnd extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
+        jDialog2 = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -301,6 +308,47 @@ public class FrontEnd extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialog2.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                jDialog2WindowOpened(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton3.setText("Cerrar");
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
+                .addContainerGap())
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -498,6 +546,8 @@ public class FrontEnd extends javax.swing.JFrame {
         jPanel3.setVisible(false);
         jPanel4.setVisible(false);
         jPanel6.setVisible(false);
+        jDialog2.setBounds(0,0,1019, 586);
+        jDialog2.setVisible(true);
     }//GEN-LAST:event_formWindowOpened
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -523,6 +573,15 @@ public class FrontEnd extends javax.swing.JFrame {
         }
         jDialog1.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jDialog2WindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog2WindowOpened
+        dm.addColumn("nombre obstaculo");
+        dm.addColumn("cuadra");
+        dm.addColumn("gasolina gastada");
+        dm.addColumn("tiempo gastado");
+        
+        jTable1.setModel(dm);
+    }//GEN-LAST:event_jDialog2WindowOpened
 //    public void paint(Graphics g) 
     {
 //        Graphics2D g2 = (Graphics2D) g;
@@ -596,6 +655,7 @@ public class FrontEnd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -604,6 +664,7 @@ public class FrontEnd extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -625,6 +686,7 @@ public class FrontEnd extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
@@ -632,5 +694,6 @@ public class FrontEnd extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JSpinner jSpinner5;
     private javax.swing.JSpinner jSpinner6;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
