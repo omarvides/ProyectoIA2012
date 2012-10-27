@@ -34,7 +34,6 @@ public class mapa {
         for(int i=0;i<tam;i++){
             cadena=cadena+rutaoptima.charAt(i)+",";
         }
-        
         return cadena;
     }
     
