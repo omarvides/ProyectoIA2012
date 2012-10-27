@@ -8,6 +8,7 @@ import MAPITA.mapa;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.io.*;
 import java.util.ArrayList;
@@ -167,7 +168,7 @@ public class FrontEnd extends javax.swing.JFrame {
         repaint(0, 0, 800, 800);
     }//GEN-LAST:event_jButton1ActionPerformed
     public static File archivo;
-    mapa m1;
+   mapa m1;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int seleccion = fileChooser.showOpenDialog(this);
