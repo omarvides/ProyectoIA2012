@@ -15,8 +15,9 @@ public class ProyectoIA2012Git {
     /**
      * @param args the command line arguments
      */
+    public static FrontEnd myfe;
     public static void main(String[] args) {
-        FrontEnd myfe = new FrontEnd();
+        myfe = new FrontEnd();
         myfe.setVisible(true);
     }
 }

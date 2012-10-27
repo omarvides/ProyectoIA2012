@@ -784,18 +784,17 @@ public class FrontEnd extends javax.swing.JFrame {
 
     public void paint(Graphics g) 
     {
-       //Graphics2D g2 = (Graphics2D)g;
-       super.paint(g);
-       //if(m1!=null){
+        super.paint(g);
+        
+        
             
-       if(ejecucion.m1!=null){   
-       for (int x = 1; x < 20; x++) {
-            for (int y = 1; y < 20; y++) {
-                Rectangle2D.Double square = new Rectangle2D.Double(60 + 25 * x, 30 + 25 * y+50, 20, 20);
-                g.setColor(Color.MAGENTA);
-                g.fillRect(60+25*x, 30+25*y, 20,20);
-                //g2.fill(square);
-                //g2.draw(square);
+       if(ejecucion.pintar){   
+        int tamX = (jPanel1.getWidth()/ejecucion.m1.getManzVertical())/*-(ejecucion.m1.getManzVertical()*20)*/;
+        int tamY = (jPanel1.getHeight()/ejecucion.m1.getManzHorizontal())/*-(ejecucion.m1.getManzHorizontal()*20)*/;
+           for (int x = 0; x < ejecucion.m1.getManzVertical(); x++) {
+            for (int y = 0; y < ejecucion.m1.getManzHorizontal(); y++) {                
+                g.setColor(Color.WHITE);
+                g.fillRect(tamX*x+40, tamY*y+85, tamX-20,tamY-20);                
             }
 
         }
